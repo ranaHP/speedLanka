@@ -1,0 +1,16 @@
+.category-items-container{
+
+  .category {
+    ul{
+      list-style: none;
+    }
+
+    .title {
+      background-color: $primary-color;
+      color: white;
+
+      text-align: center;
+    }
+
+  }
+}

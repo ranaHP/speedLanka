@@ -1,0 +1,12 @@
+.add-to-fav{
+  text-align: right;
+  font-weight: 500;
+  font-size: .95em;
+  color: gray;
+  display: inline;
+  cursor: pointer;
+  svg {
+    color: $secondary_color;
+    margin-bottom: 5px;
+  }
+}

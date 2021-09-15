@@ -1,0 +1,40 @@
+.alert-system{
+  position: fixed;
+  right: 10px;
+  top: 80px;
+  //border: 1px solid $primary-color;
+  background-color: $primary-color;
+  color: white;
+  width: 400px;
+  z-index: 150;
+  box-shadow: -2px 2px 0px rgba(0, 0, 0, 0.08);
+  animation: 1s none pulse;
+  @keyframes pulse {
+    0% {
+      transform: scale(.5);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .close-btn-container{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(197, 194, 194, 0.71);
+    .close-btn{
+      width: fit-content;
+    }
+    span{
+      //text-align: center;
+    }
+    //.close-btn{
+    //  float: left;
+    //  display: flex;
+    //  justify-content: flex-end;
+    //  cursor: pointer;
+    //}
+  }
+}

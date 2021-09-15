@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import './App.scss';
+import {Provider} from 'react-redux';
+import {store} from './store/reducers/rootReducers';
+import Login from "./views/Login";
+import Register from "./views/Register";
+import DashBoard from "./components/admin/Dashboard";
+import SuperAdmin from "./components/superAdmin/SuperAdmin";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+    useLocation
+} from "react-router-dom";
+import MainView from "./views/mainView";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <Provider store={store}>
+
+            <Router>
+                {/*<Link to={"/superadmin"}> Super Admin</Link>*/}
+                <Switch>
+                    <Route exact path="/">
+                        <MainView/>
+                    </Route>
+
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/register">
+                        <Register/>
+                    </Route>
+                    {/*<PrivateRoute path="/dashboard">*/}
+                    {/*    <DashBoard />*/}
+                    {/*</PrivateRoute>*/}
+
+                    <Route path="/dashboard" children={<DashBoard/>}/>
+                    <Route path="/superadmin">
+                        <SuperAdmin/>
+                    </Route>
+                </Switch>
+            </Router>
+        </Provider>
+    );
 }
+
 
 export default App;

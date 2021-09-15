@@ -1,0 +1,27 @@
+.search-post-container{
+
+  .search-post {
+    padding:  0px 50px 20px 50px;
+
+    .search-wrapper{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-top: 20px;
+      .searchBTN{
+        background-color: $primary-color;
+        //height: 40px;
+
+      }
+    }
+  }
+}
+@include media-breakpoint-down(lg) {
+  .search-post-container{
+
+    .search-post {
+      padding:  0;
+      padding-bottom: 5px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.sms-verification{
+  .opt-form{
+    display: flex;
+
+  }
+  a{
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .sms-logo{
+    display: flex;
+    justify-content: center;
+    background-color: red;
+  }
+}

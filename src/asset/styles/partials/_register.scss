@@ -1,0 +1,39 @@
+.register-container{
+  padding: 40px 0 50px 0px;
+  font-family: 'Montserrat', sans-serif;
+
+  h3{
+    color: $primary-color;
+  }
+
+  .my-carousel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form-container{
+    border: 1px dashed rgba(128, 128, 128, 0.42);
+    min-height: 20vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center  ;
+    padding: 30px;
+
+    .hideBTN{
+      cursor: pointer;
+    }
+
+    button{
+      margin-top: 40px;;
+    }
+  }
+}
+@include media-breakpoint-down(md) {
+  h3{
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+}

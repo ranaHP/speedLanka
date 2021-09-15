@@ -1,0 +1,30 @@
+.postDesc{
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85em;
+  .image{
+    padding: 0px;
+    padding-left: 2px;
+    display: flex;
+    justify-content: center;
+    img{
+      height: 150px;
+      width: 200px;
+      border-radius: 0;
+      border: 1px solid rgba(128, 128, 128, 0.47);
+      margin: auto;
+    }
+  }
+  .action{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .update {
+      color: #fccc1a;
+    }
+    .copyContact{
+      font-size: .9em;
+      background-color: $primary-color;
+    }
+
+  }
+}

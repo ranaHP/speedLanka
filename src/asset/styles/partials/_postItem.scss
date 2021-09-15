@@ -1,0 +1,74 @@
+.postItem{
+  margin-bottom: 10px !important;
+  border-radius: 0;
+  border: 1px solid rgba(128, 126, 126, 0.52);
+  background-color: white!important;
+  font-size: .8em;
+  min-height:  170px;
+  .image{
+    display: flex;
+    justify-content: center;
+
+    img{
+      padding: 10px;
+      height: 150px;
+      width: 150px;
+      border-radius: 0;
+      margin: auto;
+    }
+  }
+  .action{
+    display: flex;
+    justify-content: flex-end ;
+    flex-direction: column;
+    .view-btn{
+      background-color: $postItem-btn;
+      font-size: .9em;
+    }
+    .btn-danger{
+      font-size: .9em;
+    }
+    .give-approved{
+      font-size: .9em;
+    }
+  }
+  .desc{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    ul{
+      list-style: none;
+      color: #646464;
+
+    }
+
+    .title{
+      font-size: 1.2em;
+      color: rgba(21, 21, 21, 0.89);
+      padding-bottom: 10px;
+    }
+    .price{
+      color: #db0000;
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+    .location{
+
+    }
+    .phone-number {
+      font-weight: 400;
+
+    }
+    .desc{
+      display: inline;
+    }
+  }
+}
+@include media-breakpoint-down(md) {
+  .postItem{
+    .image{
+      padding: 0px;
+      padding-top: 20px;
+    }
+  }
+}
