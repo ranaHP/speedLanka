@@ -59,6 +59,22 @@ export interface IFormData {
     displayNumber: string
     _id:string
 }
+export interface IFormDataResponse {
+    cType: string
+    location: string
+    title: string
+    price: string
+    desc: string
+    attribute: string
+    sellerName: string
+    sellerContact: string
+    images: string
+    approved:string
+    date: string
+    sellerVerified: string
+    displayNumber: string
+    _id:string
+}
 export interface ILocation {
     province: string
     distrisct: string

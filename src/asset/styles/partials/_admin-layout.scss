@@ -51,11 +51,11 @@ $padding-value: 12px;
       .profile-image-container {
         display: flex;
         justify-content: center;
-
+        padding-top: 10px;
         .profile-image {
           width: 40px;
-          padding-top: 20px;
-          padding-bottom: 20px;
+          height: 40px;
+          border-radius: 100%;
         }
       }
 
@@ -159,6 +159,14 @@ $padding-value: 12px;
   .page-title{
     padding: 20px 20px 0px 20px;
     background-color: #4c8705;
+  }
+}
+@include media-breakpoint-down(md) {
+  .profile-image {
+    width: 30px;
+  }
+  .admin-layout{
+    font-size: .95em;
   }
 }
 @include media-breakpoint-down(xs) {
