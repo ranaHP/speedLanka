@@ -74,6 +74,7 @@ export interface IFormDataResponse {
     sellerVerified: string
     displayNumber: string
     _id:string
+    message?:string
 }
 export interface ILocation {
     province: string

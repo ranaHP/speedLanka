@@ -80,6 +80,7 @@ $padding-value: 12px;
 
     .content-container {
       padding: 2rem 2rem 5rem 2rem;
+      margin-top: 10px;
       background-color: rgba(252, 252, 252, 0.27);
       border-radius: 0 $border-radius-value $border-radius-value 0;
       margin-left: auto !important;
@@ -141,7 +142,7 @@ $padding-value: 12px;
 
       .page-title {
         padding: 20px 20px 0px 20px;
-        background-color: rgba(128, 128, 128, 0.11);
+        background-color: $mygraylighter;
         color: rgba(0, 0, 0, 0.62);
       }
 

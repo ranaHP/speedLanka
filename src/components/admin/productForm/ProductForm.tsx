@@ -193,7 +193,7 @@ const ProductForm: React.FC = () => {
     }, []);
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} className="p-5">
+        <Form onSubmit={handleSubmit(onSubmit)} className="p-5 col-sm-12  col-md-12 col-md-11  col-lg-10 col-xl-8 m-auto mt-3 bg-light shadow-10"  >
             <ToastContainer/>
             <Row>
                 {isPostItem &&
@@ -258,30 +258,31 @@ const ProductForm: React.FC = () => {
                     {errors.desc && <Form.Text className="text-danger "> required </Form.Text>}
 
                 </Form.Group>
-                <Row>
-                    <div className="attribute_container">
-                        <Row className={"pb-3 border-bottom"}>
+                <Row className="m-0 p-0">
+                    <div className="attribute_container  m-auto">
+                        <Row className={"pb-3 border-bottom "}>
                             {
                                 attributeList?.map((attribute: IAttribute, index: number) => {
-                                    return (<Col xs={12} sm={12} md={6} lg={6} xl={6} key={index}>
-                                        <Form.Group >
-                                            <Form.Label> {attribute.name} </Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                style={{border: attributeError ? "1px soild red" : "0px soild red"}}
-                                                onChange={(e) => {
-                                                    if (attributeList) {
-                                                        const attList = attributeList.slice();
-                                                        attList[index].desc = e.target.value;
-                                                        setAttributeList(attList);
+                                    return (
+                                        <Col xs={12} sm={12} md={6} lg={6} xl={6} key={index} className="m-auto"  >
+                                            <Form.Group  >
+                                                <Form.Label> {attribute.name} </Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    style={{border: attributeError ? "1px soild red" : "0px soild red"}}
+                                                    onChange={(e) => {
+                                                        if (attributeList) {
+                                                            const attList = attributeList.slice();
+                                                            attList[index].desc = e.target.value;
+                                                            setAttributeList(attList);
 
-                                                    }
-                                                }}
-                                                required
-                                                value={String(attributeList[index].desc)}
-                                            />
-                                        </Form.Group>
-                                    </Col>)
+                                                        }
+                                                    }}
+                                                    required
+                                                    value={String(attributeList[index].desc)}
+                                                />
+                                            </Form.Group>
+                                        </Col>)
                                 })
                             }
                         </Row>
