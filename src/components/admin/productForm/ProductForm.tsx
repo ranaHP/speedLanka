@@ -63,7 +63,6 @@ const ProductForm: React.FC = () => {
 
     useEffect(() => {
         setLoginDetailsDecodes(jwt_decode(String(loginDetail.loginDetails ? loginDetail.loginDetails : "")));
-        // setLoginDetailsDecodes(jwt_decode(loginDetail.loginDetails));
     }, [loginDetail]);
 
     const dispatch = useDispatch();
@@ -94,15 +93,19 @@ const ProductForm: React.FC = () => {
         setLocationOptionsList(_optionList);
     }
     const onSubmit = async (formData: any) => {
-        
-        
+
+        if(!formData.categoryPType  || !formData.categorySType || !formData.locationPType || !formData.locationDType || !formData.locationCType){
+            setErrorMessage("All fields are required!");
+            return;
+        }
+        setErrorMessage("");
         try {
             const data = new Date();
             const newPost = await createPostMutation({
                 variables: {
                     _id: String(formData.title+ formData.sContact + Math.floor(Math.random() * 100000)),
-                    cType: formData.categoryType.label,
-                    location: formData.locationType.label,
+                    cType: formData.categoryPType ? formData.categoryPType.label + "/" + (formData.categorySType ? formData.categorySType.label  : "") : "temp...",
+                    location: formData.locationPType ? formData.locationPType.label + "/" + (formData.locationDType ? formData.locationDType.label + "/" + (formData.locationCType ? formData.locationCType.label : "") : "") : "temp...",
                     title: formData.title,
                     price: formData.price,
                     desc: formData.desc,
@@ -110,7 +113,7 @@ const ProductForm: React.FC = () => {
                     sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
                     sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..",
                     images: "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=MCS252c0a",
-                    approved: "not",
+                    approved: "pending",
                     date: data.getDate(),
                     sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..",
                     attribute: JSON.stringify(attributeList)
@@ -133,22 +136,7 @@ const ProductForm: React.FC = () => {
             }
             ;
         }
-        // console.log({
-        //     "_id":String(formData.title+ formData.sContact + Math.floor(Math.random() * 100000)),
-        //     "cType": formData.categoryType.label,
-        //     "location": formData.locationType.label,
-        //     "title": formData.title,
-        //     "price": formData.price,
-        //     "desc": formData.desc,
-        //     "attribute": JSON.stringify(attributeList),
-        //     "displayNumber": formData.sContact,
-        //     "sellerName": loginDetailsDecodes ? loginDetailsDecodes[0].name : "trmp..",
-        //     "sellerContact": loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp...",
-        //     "images": "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=MCS252c0a",
-        //     "approved": "not",
-        //     "date": Date(),
-        //     "sellerVerified": loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..."
-        // });
+
         setTimeout(() => {
            reset();
            setAttributeList(null);
@@ -169,7 +157,7 @@ const ProductForm: React.FC = () => {
         dispatch(updateTempPost({
             title: watch('title'),
             _id: "",
-            cType: watch("categoryType") ? watch("categoryType").label : "temp...",
+            cType: watch("categoryPType") ? watch("categoryPType").label + "/" + (watch("categorySType") ? watch("categorySType").label : "") : "temp...",
             sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
             attribute: attributeList ? attributeList : [],
             date: Date(),
@@ -177,7 +165,7 @@ const ProductForm: React.FC = () => {
             approved: "approved",
             sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp...",
             desc: watch("desc"),
-            location: watch("locationType") ? watch("locationType").label : "temp...",
+            location: watch("locationPType") ? watch("locationPType").label + "/" + (watch("locationDType") ? watch("locationDType").label + "/" + (watch("locationCType") ? watch("locationCType").label : "") : "") : "temp...",
             displayNumber: watch("sContact"),
             images: "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=MCS252c0a",
             sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..."
@@ -185,7 +173,7 @@ const ProductForm: React.FC = () => {
         setIsPostItem(true);
 
 
-    }, [attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') ,  watch("locationType") , watch("categoryType")]);
+    }, [attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') ,  watch("locationPType"),  watch("locationDType"),  watch("locationCType") , watch("categoryPType"), watch("categorySType")]);
 
     useEffect(() => {
         createProductTypeOptions();
@@ -211,9 +199,9 @@ const ProductForm: React.FC = () => {
 
                 </Form.Group>
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> Category </Form.Label>
+                    <Form.Label> Main Category  </Form.Label>
                     <Controller
-                        name="categoryType"
+                        name="categoryPType"
                         control={control}
                         render={({field}) => <Select
                             isClearable
@@ -222,12 +210,29 @@ const ProductForm: React.FC = () => {
                             options={categoryOptionsList}
                         />}
                     />
-                    {watch("categoryType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                    {watch("categoryPType") == null && <Form.Text className="text-danger "> required </Form.Text>}
                 </Col>
+
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> Location </Form.Label>
+                    <Form.Label> Sub Category </Form.Label>
                     <Controller
-                        name="locationType"
+                        name="categorySType"
+                        control={control}
+                        render={({field}) => <Select
+                            isClearable
+                            isSearchable
+                            {...field}
+                            options={categoryOptionsList}
+                        />}
+                    />
+                    {watch("categorySType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                </Col>
+
+
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                    <Form.Label> Province </Form.Label>
+                    <Controller
+                        name="locationPType"
                         control={control}
                         render={({field}) => <Select
                             isClearable
@@ -236,7 +241,35 @@ const ProductForm: React.FC = () => {
                             options={LocationOptionsList}
                         />}
                     />
-                    {watch("locationType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                    {watch("locationPType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                    <Form.Label> District </Form.Label>
+                    <Controller
+                        name="locationDType"
+                        control={control}
+                        render={({field}) => <Select
+                            isClearable
+                            isSearchable
+                            {...field}
+                            options={LocationOptionsList}
+                        />}
+                    />
+                    {watch("locationDType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                    <Form.Label> City </Form.Label>
+                    <Controller
+                        name="locationCType"
+                        control={control}
+                        render={({field}) => <Select
+                            isClearable
+                            isSearchable
+                            {...field}
+                            options={LocationOptionsList}
+                        />}
+                    />
+                    {watch("locationCType") == null && <Form.Text className="text-danger "> required </Form.Text>}
                 </Col>
 
 
@@ -359,7 +392,9 @@ const ProductForm: React.FC = () => {
                     </Alert>
                 }
                 <Button variant="primary" className="btn btn-primary float-end mb-4" type="submit">
-                    Add Advertisement
+                    {
+                        loading ? "loading...." : "Add Advertisement"
+                    }
                 </Button>
 
 

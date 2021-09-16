@@ -64,6 +64,11 @@ const ViewAllAdsSuperAdmin: React.FC = () => {
                     <Form onSubmit={handleSubmit(onSubmit)} className="p-2 my-3 search-form">
                         <Row className="col-11 m-0 p-0 m-auto ">
                             <div className="form-group">
+                                <Form.Label>Reference Number</Form.Label>
+                                <Form.Control className="advertisement-name-input" type="string"
+                                              placeholder="" {...register("ref", {})}/>
+                            </div>
+                            <div className="form-group">
                                 <Form.Label>Title</Form.Label>
                                 <Form.Control className="advertisement-name-input" type="string"
                                               placeholder="" {...register("title", {})}/>
@@ -86,7 +91,7 @@ const ViewAllAdsSuperAdmin: React.FC = () => {
                     </Form>
                     <Row className=" m-0 p-0 m-auto ">
                         <Col xs={12} sm={12} md={12} lg={12} xl={12} className=" m-0 p-0 m-auto ">
-                            <Table striped bordered hover responsive>
+                            <Table striped bordered hover responsive >
                                 <thead>
                                 <tr>
                                     <th>#</th>
