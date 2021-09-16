@@ -6,7 +6,7 @@ type PageTitleProps  = {
 }
 const PageTitle: React.FC<PageTitleProps> = (props) => {
     return (
-            <div className="page-title">
+            <div className="page-title pb-3">
                 <h3>{props.title} </h3>
                 <span className="sub-title"> {props.subTitle} </span>
             </div>

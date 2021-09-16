@@ -10,7 +10,11 @@ $secondary_color: #fccc1a !default;
 $classified_btn : red !default;
 $category_title :  linear-gradient(to right, #1b3680, #004f8e, #00638b, #00737e, #11816e);  ;
 $postItem-btn: #204093 !default;
+$mygraylighter: #f8f9fa !default;
 
+$success: #4c8705 !default;
+$danger: #4c8705 !default;
+$warning: #4c8705 !default;
 @if $dark-theme {
   $primary-color: darken($primary-color, 60%);
   $accent-color: lighten($accent-color, 60%);

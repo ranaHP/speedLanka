@@ -29,7 +29,7 @@ const MainNavBar: React.FC<MainNavBarProps> = (props) => {
             <Col xs={12} sm={12} md={12} lg={11} xl={11} className="m-auto ">
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <Logo/>
+                        {/*<Logo/>*/}
                     </Nav>
                     {
                         type == "22" &&
@@ -52,9 +52,9 @@ const MainNavBar: React.FC<MainNavBarProps> = (props) => {
                     <Nav>
 
 
-                        {loginDetail.loginDetails &&
-                            <Cart/>
-                        }
+                        {/*{loginDetail.loginDetails &&*/}
+                        {/*    <Cart/>*/}
+                        {/*}*/}
 
                         {loginDetail.loginDetails && props.componentType == "2" &&
                             <DashboardBTN/>

@@ -20,6 +20,7 @@ export const Get_SELLER_POST = gql`
         date
         sellerVerified
         attribute
+        message
       }
     }
 

@@ -9,6 +9,7 @@ import ViewPost from "../admin/viewPost/ViewPost";
 import DashBoardHome from "../admin/Home/DashBoardHome";
 import ViewAllAds from "./viewAllAds/ViewAllAds";
 import ViewUnApprovedAds from "./viewUnApporovedAds/ViewAllAds";
+import ViewAllAdsSuperAdmin from "./viewAllAds/ViewAllAds";
 
 const SuperAdmin: React.FC =  ( ) => {
     return (
@@ -19,7 +20,7 @@ const SuperAdmin: React.FC =  ( ) => {
                     <MainNavBar componentType={"1"}/>
                     <Switch>
                         <Route path={`/superadmin/all-ads`}>
-                            <ViewAllAds/>
+                            <ViewAllAdsSuperAdmin/>
                         </Route>
                         <Route path={`/superadmin/ads-for-approved`}>
                             {/*<ViewPost/>*/}
