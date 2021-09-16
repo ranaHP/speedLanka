@@ -7,16 +7,16 @@ import {Controller, useForm} from "react-hook-form";
 import Select from "react-select";
 import {IAttribute, IFormDataResponse, IOption} from "../../../types/MainTypes";
 import {Electronic} from "../../../config/attributeType";
+
 type PostEditModelProps = {
-    isShow : boolean
+    isShow: boolean
     isHide: () => void
     post: IFormDataResponse
 }
-const options: IOption[] = [
-]
-const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
+const options: IOption[] = []
+const PostEditModel: React.FC<PostEditModelProps> = (props) => {
     const [showEdit, setShowEdit] = useState(false);
-    const {register, handleSubmit, watch, reset ,control, formState: {errors}} = useForm();
+    const {register, handleSubmit, watch, reset, control, formState: {errors}} = useForm();
     const [attributeList, setAttributeList] = useState<IAttribute [] | null>(Electronic);
     const [attributeName, setAttributeName] = useState<string>("");
     const [attributeDesc, setAttributeDesc] = useState<string>("");
@@ -31,7 +31,7 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
     }
 
     useEffect(() => {
-        if(!props.isShow) return;
+        if (!props.isShow) return;
         setShowEdit(props.isShow);
         setAttributeList(JSON.parse(props.post.attribute));
     }, [props.isShow]);
@@ -54,7 +54,7 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
             setAttributeDesc("");
         }
     }
-    const isHide = ( ) => {
+    const isHide = () => {
         setShowEdit(false);
         props.isHide();
     }
@@ -63,7 +63,7 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
             show={showEdit}
             backdrop="static"
             keyboard={false}
-            onHide={ isHide }
+            onHide={isHide}
         >
             <Modal.Header closeButton>
                 <Modal.Title>Advertisement Edit</Modal.Title>
@@ -73,32 +73,51 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
                     <Row>
                         <Form.Group className="mb-3 col-12">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control type="string" defaultValue={props.post.title} placeholder="" {...register("title", {
+                            <Form.Control type="string" defaultValue={props.post.title}
+                                          placeholder="" {...register("title", {
                                 required: true,
                             })}/>
-                            {errors.title  && <Form.Text className="text-danger "> required </Form.Text>}
+                            {errors.title && <Form.Text className="text-danger "> required </Form.Text>}
 
                         </Form.Group>
-                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                            <Form.Label> Category </Form.Label>
-                            <Controller
-                                name="categoryType"
 
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                            <Form.Label> Main Category </Form.Label>
+                            <Controller
+                                name="categoryPType"
                                 control={control}
                                 render={({field}) => <Select
                                     isClearable
                                     isSearchable
-                                    defaultValue={{value: "ss" , label: "333"}}
                                     {...field}
                                     options={categoryOptionsList}
                                 />}
                             />
-                            {watch("categoryType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                            {watch("categoryPType") == null &&
+                            <Form.Text className="text-danger "> required </Form.Text>}
                         </Col>
+
                         <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                            <Form.Label> Location </Form.Label>
+                            <Form.Label> Sub Category </Form.Label>
                             <Controller
-                                name="locationType"
+                                name="categorySType"
+                                control={control}
+                                render={({field}) => <Select
+                                    isClearable
+                                    isSearchable
+                                    {...field}
+                                    options={categoryOptionsList}
+                                />}
+                            />
+                            {watch("categorySType") == null &&
+                            <Form.Text className="text-danger "> required </Form.Text>}
+                        </Col>
+
+
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                            <Form.Label> Province </Form.Label>
+                            <Controller
+                                name="locationPType"
                                 control={control}
                                 render={({field}) => <Select
                                     isClearable
@@ -107,7 +126,38 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
                                     options={LocationOptionsList}
                                 />}
                             />
-                            {watch("locationType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                            {watch("locationPType") == null &&
+                            <Form.Text className="text-danger "> required </Form.Text>}
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                            <Form.Label> District </Form.Label>
+                            <Controller
+                                name="locationDType"
+                                control={control}
+                                render={({field}) => <Select
+                                    isClearable
+                                    isSearchable
+                                    {...field}
+                                    options={LocationOptionsList}
+                                />}
+                            />
+                            {watch("locationDType") == null &&
+                            <Form.Text className="text-danger "> required </Form.Text>}
+                        </Col>
+                        <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
+                            <Form.Label> City </Form.Label>
+                            <Controller
+                                name="locationCType"
+                                control={control}
+                                render={({field}) => <Select
+                                    isClearable
+                                    isSearchable
+                                    {...field}
+                                    options={LocationOptionsList}
+                                />}
+                            />
+                            {watch("locationCType") == null &&
+                            <Form.Text className="text-danger "> required </Form.Text>}
                         </Col>
 
 
@@ -135,25 +185,26 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
                                     {
                                         attributeList?.map((attribute: IAttribute, index: number) => {
                                             return (
-                                                <Col xs={12} sm={12} md={6} lg={6} xl={6} key={index} className="m-auto"  >
-                                                <Form.Group  >
-                                                    <Form.Label> {attribute.name} </Form.Label>
-                                                    <Form.Control
-                                                        type="text"
-                                                        style={{border: attributeError ? "1px soild red" : "0px soild red"}}
-                                                        onChange={(e) => {
-                                                            if (attributeList) {
-                                                                const attList = attributeList.slice();
-                                                                attList[index].desc = e.target.value;
-                                                                setAttributeList(attList);
+                                                <Col xs={12} sm={12} md={6} lg={6} xl={6} key={index}
+                                                     className="m-auto">
+                                                    <Form.Group>
+                                                        <Form.Label> {attribute.name} </Form.Label>
+                                                        <Form.Control
+                                                            type="text"
+                                                            style={{border: attributeError ? "1px soild red" : "0px soild red"}}
+                                                            onChange={(e) => {
+                                                                if (attributeList) {
+                                                                    const attList = attributeList.slice();
+                                                                    attList[index].desc = e.target.value;
+                                                                    setAttributeList(attList);
 
-                                                            }
-                                                        }}
-                                                        required
-                                                        value={String(attributeList[index].desc)}
-                                                    />
-                                                </Form.Group>
-                                            </Col>)
+                                                                }
+                                                            }}
+                                                            required
+                                                            value={String(attributeList[index].desc)}
+                                                        />
+                                                    </Form.Group>
+                                                </Col>)
                                         })
                                     }
                                 </Row>
@@ -204,7 +255,8 @@ const PostEditModel: React.FC<PostEditModelProps> = ( props ) => {
                         </Row>
                         <Form.Group className="mb-3 col-12">
                             <Form.Label>Seller contact Number</Form.Label>
-                            <Form.Control type="number"  defaultValue={props.post.displayNumber} {...register("sContact", {
+                            <Form.Control type="number"
+                                          defaultValue={props.post.displayNumber} {...register("sContact", {
                                 required: true,
                                 maxLength: 10,
                                 minLength: 10
