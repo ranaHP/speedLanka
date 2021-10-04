@@ -1,3 +1,11 @@
+export interface IProvinceList  {
+    province: string,
+    districtList: IDistrict []
+}
+export interface IDistrict  {
+    district: string,
+    cityList: string []
+}
 export const province_cities_district = [
     {
         province: "Eastern",

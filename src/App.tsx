@@ -16,6 +16,8 @@ import {
     useLocation
 } from "react-router-dom";
 import MainView from "./views/mainView";
+import Home from "./views/Home";
+import UserHome from "./components/Home/Home";
 
 
 function App() {
@@ -27,9 +29,12 @@ function App() {
                 {/*<Link to={"/superadmin"}> Super Admin</Link>*/}
                 <Switch>
                     <Route exact path="/">
+                        {/*<MainView/>*/}
+                        <UserHome/>
+                    </Route>
+                    <Route path="/product/:loc/:cat/:tit">
                         <MainView/>
                     </Route>
-
                     <Route path="/login">
                         <Login/>
                     </Route>

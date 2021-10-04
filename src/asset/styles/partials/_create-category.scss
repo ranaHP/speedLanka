@@ -1,0 +1,26 @@
+.create-category{
+  font-family: 'Raleway', sans-serif;
+  .create-category-form{
+    .create-category-title{
+      background-color: $primary-color;
+    }
+    //.form-control{
+    //  width: 200px;
+    //}
+    .form-group{
+      height: 100px;
+      margin-left: 10px;
+    }
+    .form-group button {
+      width: 200px;
+    }
+
+    .create-category-title h3{
+      color: white;
+      font-size: 1.4em;
+      padding: 10px;
+    }
+
+  }
+
+}

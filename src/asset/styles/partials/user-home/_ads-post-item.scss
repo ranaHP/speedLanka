@@ -1,0 +1,120 @@
+.ads-item-container{
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+  .home-post-item{
+    width: 350px;
+    margin: auto;
+    position: relative;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    height: fit-content;
+    padding-bottom: 5px;
+    background-color: #EB3B5A;
+    cursor: pointer;
+
+    .image{
+      width: 350px;
+      height: 260px;
+    }
+    .home-user-text-content{
+      background-color: white;
+      bottom: 0px;
+      width: 100%;
+      padding: 10px;
+      z-index: 1;
+      position: relative;
+      .view-more-btn{
+        position: absolute;
+        top: -15px;
+        right: 30px;
+        height: 30px;
+        line-height: 10px;
+        border-radius: 50px;
+      }
+      //.fav-btn{
+      //  position: absolute;
+      //  top: -15px;
+      //  right: 20px;
+      //  height: 30px;
+      //  display: flex;
+      //  justify-content: center;
+      //  align-items: center;
+      //}
+      .home-user-text-content-title{
+        font-size: 1.2em;
+        padding-top: 15px;
+        text-align: left;
+
+      }
+      .category-name{
+        font-size: .79em;
+      }
+      .suwasewana{
+        font-size: .70em;
+        text-align: left;
+
+      }
+      .posted-date{
+        padding-top: 15px;
+        font-size: .9em;
+        text-align: left;
+
+      }
+      .desc{
+        font-size: .8em;
+        text-align: left;
+      }
+      .seller-status{
+        font-size: .8em;
+        text-align: right;
+      }
+      .seller-name{
+        font-size: .8em;
+        text-align: right;
+      }
+      .attribute-list{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: start;
+        padding-top: 20px;
+        .attribute-item{
+          width: 200px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .home-post-item:hover  {
+    background-color: #006633;
+  }
+  .home-post-item:hover .view-more-btn {
+    background-color: #006633;
+    border: 1px solid #006633;
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .home-post-item-container{
+    padding: 30px 5px;
+    .home-post-item{
+      .home-user-text-content{
+        .view-more-btn{
+        }
+        .home-user-text-content-title{
+        }
+        .suwasewana{
+        }
+        .posted-date{
+        }
+        .desc{
+        }
+      }
+    }
+  }
+}

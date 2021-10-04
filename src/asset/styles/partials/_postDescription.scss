@@ -1,6 +1,29 @@
 .postDesc{
   font-family: 'Montserrat', sans-serif;
   font-size: .85em;
+
+  .post-desc-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  .post-desc-image-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .post-desc-image-container{
+      height: fit-content;
+      width: 250px;
+      padding: 10px;
+    }
+    .post-desc-image-container:hover {
+      -ms-transform: scale(1.5); /* IE 9 */
+      -webkit-transform: scale(1.5); /* Safari 3-8 */
+      transform: scale(1.5);
+    }
+  }
   .image{
     padding: 0px;
     padding-left: 2px;

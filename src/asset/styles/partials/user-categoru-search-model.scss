@@ -1,0 +1,14 @@
+.user-category-search-model{
+
+
+}
+.modal-body{
+  .category-select-item {
+    border-bottom: 1px solid $gray_border;
+    min-height: 30px;
+    cursor: pointer;
+  }
+  .category-select-item:hover , .category-select-item:focus {
+    background-color: rgba(252, 204, 26, 0.45);
+  }
+}

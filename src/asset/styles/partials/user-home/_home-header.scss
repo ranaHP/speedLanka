@@ -1,0 +1,150 @@
+.user-home-header {
+  padding: 0 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 55px;
+  //background-color: #fccc1a;
+
+  .logo{
+    width: 60px;
+  }
+  .user-home-navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 59px;
+    min-width: 30%;
+    padding: 8px 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    font-family: 'Arial', sans-serif;
+    color: #707070;
+    font-size: .93em;
+    li {
+      cursor: pointer;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    li:hover {
+      text-decoration: underline;
+    }
+
+    .special-nav {
+      background-color: #EB3B5A;
+      border-radius: 59px;
+      color: white;
+      padding: 1px 50px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
+  }
+
+  .user-home-login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .language {
+      border-radius: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      color: #707070;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0 10px;
+
+      span {
+        padding: 0 10px;
+        font-size: 14px;
+      }
+    }
+
+    .register-btn {
+      color: $commn-green;
+      padding: 0px 30px;
+      font-size: 1.05em;
+    }
+
+    .login-btn {
+      background-color: $commn-green;
+      color: white;
+      padding: 0px 30px;
+      height: 30px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 60px;
+      font-size: 1.05em;
+      cursor: pointer;
+    }
+
+  }
+}
+
+@include media-breakpoint-down(xl) {
+  .user-home-header{
+      font-size: .8em;
+    .img{
+      width: 50px;
+    }
+    //.user-home-navbar{
+    //  font-size: .8em;
+    //}
+  }
+}
+
+@include media-breakpoint-down(lg) {
+  .user-home-header{
+    font-size: .8em;
+    .user-home-navbar{
+      display: none;
+    }
+    .logo{
+      width: 50px;
+    }
+  }
+}
+
+
+@include media-breakpoint-down(sm) {
+  .user-home-header{
+    font-size: .9em;
+    flex-direction: column;
+    height: 150px;
+    padding: 0 ;
+    .user-home-navbar{
+      flex-direction: row;
+      display: flex;
+      width: 100%;
+      padding: 8px 0px;
+      border-radius: 0px;
+      li{
+        min-width: fit-content;
+        font-size: 1.4em;
+        padding: 0 10px;
+        font-weight: 500;
+      }
+      .special-nav{
+        padding: 1px 10px;
+      }
+    }
+    .user-home-login-register{
+      .login-btn{
+        height: 25px;
+        line-height: 25px;
+      }
+      .language {
+
+        span {
+          padding: 0 10px;
+          font-size: .90em;
+        }
+      }
+    }
+    .logo{
+      width: 50px;
+    }
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { useEffect,  useState} from 'react';
-import {Alert, Button, Col, Row} from 'react-bootstrap';
+import {Alert, Button, Col, Image, Row} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form'
 import {
     IAttribute,
@@ -26,6 +26,8 @@ import {categoryType} from "../../../config/postCategory";
 import {province_cities_district} from "../../../config/province_cities_district";
 import {useMutation} from "@apollo/client";
 import {CREATE_POST} from "../../../api/user/mutations";
+import UserCategorySearch from "../../userSearchCategory/UserCategorySearch";
+import UserLocationSearch from "../../userSearchLocation/UserLocationSearch";
 const options: IOption[] = [
 ]
 
@@ -37,11 +39,54 @@ const ProductForm: React.FC = () => {
     const [attributeError, setAttributeError] = useState<Boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const loginDetail: {loginDetails:string} = useSelector((state: RootState) => state.loginReducer);
-    const [categoryOptionsList, setCategoryOptionsList] = useState<IOption []>(options);
-    const [LocationOptionsList, setLocationOptionsList] = useState<IOption []>(options);
     const [createPostMutation, { data, loading, error}] = useMutation(CREATE_POST);
     const [loginDetailsDecodes, setLoginDetailsDecodes] = useState<IloginDetails[] | null>( null);
     const [isPostItem, setIsPostItem] = useState(false);
+    const [primaryType, setPrimaryType] = useState<string>("");
+    const [secondaryType, setSecondaryType] = useState<string>("Select Categories");
+    const [province, setProvince] = useState<string>("");
+    const [district, setDistrict] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [city, setCity] = useState<string>("Select city");
+    const [modalShowCategory, setModalShowCategory] = useState(false);
+    const [modelShowLocation, setModelShowLocation] = useState(false);
+
+
+    //image upload
+    const [imageUploadFile1, setImageUploadFile1] = useState<File | null >(null);
+    const [imageUploadName1, setImageUploadName1] = useState<string >("");
+    const [imageUrl1, setImageUrl1] = useState<string>("");
+    const [imageUploadFile2, setImageUploadFile2] = useState<File | null >(null);
+    const [imageUploadName2, setImageUploadName2] = useState<string >("");
+    const [imageUrl2, setImageUrl2] = useState<string>("");
+    const [imageUploadFile3, setImageUploadFile3] = useState<File | null >(null);
+    const [imageUploadName3, setImageUploadName3] = useState<string >("");
+    const [imageUrl3, setImageUrl3] = useState<string>("");
+    const [imageUploadMessage, setImageUploadMessage] = useState<string >("");
+    const [isLoading, setisLoading] = useState<boolean >(false);
+
+    const getImage = (e: any , number:number) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+            const file = files[0];
+
+            if(number == 1){
+                setImageUploadFile1(file);
+                setImageUrl1(URL.createObjectURL(e.target.files[0]));
+                setImageUploadName1(e.target.files[0].name);
+            }else if(number ==2){
+                setImageUploadFile2(file);
+                setImageUrl2(URL.createObjectURL(e.target.files[0]));
+                setImageUploadName2(e.target.files[0].name);
+            }else{
+                setImageUploadFile3(file);
+                setImageUrl3(URL.createObjectURL(e.target.files[0]));
+                setImageUploadName3(e.target.files[0].name);
+            }
+
+        }
+    };
+
     const handleOnAddAttribute = (name: String, desc: String) => {
         if (!name || !desc) {
             setAttributeError(true);
@@ -62,39 +107,18 @@ const ProductForm: React.FC = () => {
     }
 
     useEffect(() => {
-        setLoginDetailsDecodes(jwt_decode(String(loginDetail.loginDetails ? loginDetail.loginDetails : "")));
+        try{
+            setLoginDetailsDecodes(jwt_decode(String(loginDetail.loginDetails ? loginDetail.loginDetails : "")));
+        }catch (e) {
+            setLoginDetailsDecodes(null)
+        }
     }, [loginDetail]);
 
     const dispatch = useDispatch();
-    const createProductTypeOptions = ( ) => {
-        const _optionList = categoryOptionsList.slice();
-        categoryType.map((category:ICategory) => {
-            category.subCategory.map((subCategory) => {
-                const item: string = category.name + "/" + subCategory.name;
-                _optionList.push({value: "p+s/"+item, label: item})
-            })
-        });
-        setCategoryOptionsList(_optionList);
-    }
-    const createLocationTypeOptions = ( ) => {
-        const _optionList = LocationOptionsList.slice();
-        province_cities_district.map((province) => {
-            const item: string = province.province ;
-            _optionList.push({value: "p/"+item, label: item})
-            province.districtList.map((district) => {
-                const item: string = province.province + "/" + district.district;
-                _optionList.push({value: "p+d/"+item, label: item})
-                district.cityList.map((city) => {
-                    const item: string = province.province + "/" + district.district + "/" + city;
-                    _optionList.push({value: "p+s+c/"+item, label: item})
-                })
-            })
-        })
-        setLocationOptionsList(_optionList);
-    }
+
     const onSubmit = async (formData: any) => {
 
-        if(!formData.categoryPType  || !formData.categorySType || !formData.locationPType || !formData.locationDType || !formData.locationCType){
+        if(city == "Select city" || secondaryType == "Select Categories" ){
             setErrorMessage("All fields are required!");
             return;
         }
@@ -104,21 +128,30 @@ const ProductForm: React.FC = () => {
             const newPost = await createPostMutation({
                 variables: {
                     _id: String(formData.title+ formData.sContact + Math.floor(Math.random() * 100000)),
-                    cType: formData.categoryPType ? formData.categoryPType.label + "/" + (formData.categorySType ? formData.categorySType.label  : "") : "temp...",
-                    location: formData.locationPType ? formData.locationPType.label + "/" + (formData.locationDType ? formData.locationDType.label + "/" + (formData.locationCType ? formData.locationCType.label : "") : "") : "temp...",
+                    cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
+                    location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
                     title: formData.title,
                     price: formData.price,
                     desc: formData.desc,
                     displayNumber: formData.sContact,
                     sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
                     sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..",
-                    images: "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=MCS252c0a",
+                    images: imageUploadName1 +'/'+ imageUploadName2 +'/'+ imageUploadName3,
                     approved: "pending",
                     date: data.getDate(),
                     sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..",
                     attribute: JSON.stringify(attributeList)
                 }
             });
+            setProvince("");
+            setDistrict("")
+            setCity("Select city");
+            setPrimaryType("");
+            setSecondaryType("Select Categories");
+            setImageUrl1("");
+            setImageUrl2("");
+            setImageUrl3("");
+            reset();
         } catch (e) {
             // console.log(e);
             setErrorMessage("This mobile number already used!");
@@ -157,7 +190,7 @@ const ProductForm: React.FC = () => {
         dispatch(updateTempPost({
             title: watch('title'),
             _id: "",
-            cType: watch("categoryPType") ? watch("categoryPType").label + "/" + (watch("categorySType") ? watch("categorySType").label : "") : "temp...",
+            cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
             sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
             attribute: attributeList ? attributeList : [],
             date: Date(),
@@ -165,31 +198,45 @@ const ProductForm: React.FC = () => {
             approved: "approved",
             sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp...",
             desc: watch("desc"),
-            location: watch("locationPType") ? watch("locationPType").label + "/" + (watch("locationDType") ? watch("locationDType").label + "/" + (watch("locationCType") ? watch("locationCType").label : "") : "") : "temp...",
+            location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
             displayNumber: watch("sContact"),
-            images: "https://cdn.alzashop.com/ImgW.ashx?fd=f16&cd=MCS252c0a",
+            images: imageUploadName1 +'/'+ imageUploadName2 +'/'+ imageUploadName3,
             sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..."
         }));
         setIsPostItem(true);
 
 
-    }, [attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') ,  watch("locationPType"),  watch("locationDType"),  watch("locationCType") , watch("categoryPType"), watch("categorySType")]);
+    }, [imageUrl1, imageUrl2,imageUrl3, attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') , secondaryType,city ]);
 
-    useEffect(() => {
-        createProductTypeOptions();
-        createLocationTypeOptions();
-    }, []);
-
+    const handleOnCategoryChange = (primaryC: string, secondaryC: string) => {
+        setPrimaryType(primaryC);
+        setSecondaryType(secondaryC);
+    }
+    const handleOnLocationChange = (province: string, district: string, city: string) => {
+        setCity(city);
+        setDistrict(district);
+        setProvince(province);
+    }
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} className="p-5 col-sm-12  col-md-12 col-md-11  col-lg-10 col-xl-8 m-auto mt-3 bg-light shadow-10"  >
+        <Form onSubmit={handleSubmit(onSubmit)} className="p-5 col-sm-12  col-md-12 col-md-11  col-lg-10 col-xl-8 m-auto mt-3 bg-light shadow-10 create-post-form"  >
             <ToastContainer/>
+            <UserLocationSearch show={modelShowLocation} onHide={() => {
+                setModelShowLocation(false)
+            }}
+                                onChange={handleOnLocationChange}/>
+            <UserCategorySearch
+                onChange={handleOnCategoryChange}
+                show={modalShowCategory}
+                onHide={() => {
+                    setModalShowCategory(false)
+                }}/>
             <Row>
-                {isPostItem &&
-                <PostItem componentType={"3"}/>
-                }
+                {/*{isPostItem &&*/}
+                {/*<PostItem componentType={"3"}/>*/}
+                {/*}*/}
 
             </Row>
-            <Row>
+            <Row className="seller-create-post">
                 <Form.Group className="mb-3 col-12">
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="string" placeholder="" {...register("title", {
@@ -199,80 +246,34 @@ const ProductForm: React.FC = () => {
 
                 </Form.Group>
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> Main Category  </Form.Label>
-                    <Controller
-                        name="categoryPType"
-                        control={control}
-                        render={({field}) => <Select
-                            isClearable
-                            isSearchable
-                            {...field}
-                            options={categoryOptionsList}
-                        />}
-                    />
-                    {watch("categoryPType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                    <div className="item" >
+                        <div className="item-label">
+                            Category
+                        </div>
+                        <div className="item-btn"  onClick={() => setModalShowCategory(true)} >
+                            {secondaryType}
+                        </div>
+                    </div>
+                    {
+                        secondaryType == "Select Categories" &&
+                            <span className="text-danger"> required*</span>
+                    }
                 </Col>
 
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> Sub Category </Form.Label>
-                    <Controller
-                        name="categorySType"
-                        control={control}
-                        render={({field}) => <Select
-                            isClearable
-                            isSearchable
-                            {...field}
-                            options={categoryOptionsList}
-                        />}
-                    />
-                    {watch("categorySType") == null && <Form.Text className="text-danger "> required </Form.Text>}
+                    <div className="item">
+                        <div className="item-label">
+                            Location
+                        </div>
+                        <div  className="item-btn" onClick={() => setModelShowLocation(true)} >
+                            {city}
+                        </div>
+                    </div>
+                    {
+                        city == "Select city" &&
+                        <span className="text-danger"> required*</span>
+                    }
                 </Col>
-
-
-                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> Province </Form.Label>
-                    <Controller
-                        name="locationPType"
-                        control={control}
-                        render={({field}) => <Select
-                            isClearable
-                            isSearchable
-                            {...field}
-                            options={LocationOptionsList}
-                        />}
-                    />
-                    {watch("locationPType") == null && <Form.Text className="text-danger "> required </Form.Text>}
-                </Col>
-                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> District </Form.Label>
-                    <Controller
-                        name="locationDType"
-                        control={control}
-                        render={({field}) => <Select
-                            isClearable
-                            isSearchable
-                            {...field}
-                            options={LocationOptionsList}
-                        />}
-                    />
-                    {watch("locationDType") == null && <Form.Text className="text-danger "> required </Form.Text>}
-                </Col>
-                <Col xs={12} sm={12} md={6} lg={6} xl={6} className="mb-2">
-                    <Form.Label> City </Form.Label>
-                    <Controller
-                        name="locationCType"
-                        control={control}
-                        render={({field}) => <Select
-                            isClearable
-                            isSearchable
-                            {...field}
-                            options={LocationOptionsList}
-                        />}
-                    />
-                    {watch("locationCType") == null && <Form.Text className="text-danger "> required </Form.Text>}
-                </Col>
-
-
                 <Form.Group className="mb-3 col-12">
                     <Form.Label>Price</Form.Label>
                     <Form.Control type="number"  {...register("price", {
@@ -374,16 +375,62 @@ const ProductForm: React.FC = () => {
                     {errors.sContact && <Form.Text className="text-danger "> required </Form.Text>}
 
                 </Form.Group>
-                <Form.Group controlId="formFileLg" className="mb-3 m-auto image-upload-container  ">
-                    <Form.Label>Product Image Upload</Form.Label>
-                    <Form.Control type="file"
 
-                                  {...register("images", {
-                                      required: true,
-                                  })}/>
-                    {errors.images && <Form.Text className="text-danger "> required </Form.Text>}
+              <div style={{maxWidth: "300px",  height : "400px", display: "flex" , justifyContent : "end" , flexDirection: "column", alignItems: "end"}}>
+                  {imageUrl1 != "" && <Image src={imageUrl1} width="80%" className="m-auto" style={{maxWidth: "300px"}}/> }
+                  <Form.Group controlId="formFileLg" className="mb-3 m-auto image-upload-container  ">
+                      <Form.Label>Product Image Upload</Form.Label>
+                      <Form.Control type="file"
 
-                </Form.Group>
+                                    {...register("images1", {
+                                        required: true,
+                                    })}
+                                    accept='image/*'
+                                    onChange={ e=> {
+                                        getImage(e , 1)
+                                    }}
+                      />
+                      {errors.images1 && <Form.Text className="text-danger "> required </Form.Text>}
+
+                  </Form.Group>
+              </div>
+                <div style={{maxWidth: "300px",  height : "400px", display: "flex" , justifyContent : "end" , flexDirection: "column", alignItems: "end"}}>
+                    {imageUrl1 != "" && <Image src={imageUrl2} width="80%" className="m-auto" style={{maxWidth: "300px"}}/> }
+                    <Form.Group controlId="formFileLg" className="mb-3 m-auto image-upload-container  ">
+                        <Form.Label>Product Image Upload</Form.Label>
+                        <Form.Control type="file"
+
+                                      {...register("images2", {
+                                          required: true,
+                                      })}
+                                      accept='image/*'
+                                      onChange={ e=> {
+                                          getImage(e , 2)
+                                      }}
+                        />
+                        {errors.images2 && <Form.Text className="text-danger "> required </Form.Text>}
+
+                    </Form.Group>
+                </div>
+                <div style={{maxWidth: "300px",  height : "400px", display: "flex" , justifyContent : "end" , flexDirection: "column", alignItems: "end"}}>
+                    {imageUrl1 != "" && <Image src={imageUrl3} width="80%" className="m-auto" style={{maxWidth: "300px"}}/> }
+                    <Form.Group controlId="formFileLg" className="mb-3 m-auto image-upload-container  ">
+                        <Form.Label>Product Image Upload</Form.Label>
+                        <Form.Control type="file"
+
+                                      {...register("images3", {
+                                          required: true,
+                                      })}
+                                      accept='image/*'
+                                      onChange={ e=> {
+                                          getImage(e , 3)
+                                      }}
+                        />
+                        {errors.images3 && <Form.Text className="text-danger "> required </Form.Text>}
+
+                    </Form.Group>
+                </div>
+
 
                 {
                     errorMessage != "" &&
