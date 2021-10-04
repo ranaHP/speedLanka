@@ -3,11 +3,11 @@ import {
     DELETE_USER_LOGIN,
     SET_USER_LOGIN, UPDATE_TEMP_POST_ITEM
 } from "../constants/CheckoutConstants";
-import {IFormData} from "../../types/MainTypes";
+import {IFormData, IFormDataResponse} from "../../types/MainTypes";
 
 export interface AddFavPostItemType {
     type: typeof ADD_FAV_POST_ITEM
-    payload: IFormData
+    payload: IFormDataResponse
 }
 
 export interface DeleteOrderItemType {

@@ -1,9 +1,15 @@
 .classified-container {
-  background-color: rgba(2, 58, 128, 0.07);
+  //background-color: rgba(2, 58, 128, 0.07);
   min-height: 100vh;
+  background-color: transparent;
 
   .classified{
-    background-color: rgb(255, 255, 255);
+    //background-color: rgb(255, 255, 255);
     //height: 500px;
+
+    .ads-post-container{
+      display: flex;
+      justify-content: center;
+    }
   }
 }

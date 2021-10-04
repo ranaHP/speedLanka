@@ -1,4 +1,10 @@
-@import "variables.scss", "./partials/admin-layout", "partials/main-nav-bar", "partials/postItem",
+@import "variables.scss", "commen", "fonts", "./partials/admin-layout", "partials/main-nav-bar", "partials/postItem",
 "partials/postItem-container", "partials/classified", "partials/category", "partials/search-post", "partials/footer",
-'partials/postDescription' , 'partials/verified-user', "partials/favorit" , "partials/register", "partials/postedDate",
-"partials/smsVarification" , "partials/alertSystem";
+'partials/postDescription', 'partials/verified-user', "partials/favorit", "partials/register", "partials/postedDate",
+"partials/smsVarification", "partials/alertSystem", "partials/post-search", "partials/create-category", "partials/user-home",
+"partials/user-home/home-post-item", "partials/user-home/home-footer", "partials/user-home/home-header"
+,"partials/user-home/home-hero" ,"partials/user-home/home-category" ,
+"partials/user-home/home-search" , "partials/user-home/home-titles", "partials/user-home/home-latest-ads",
+"partials/search-product-home/search-product-home",
+"partials/user-categoru-search-model" , "partials/user-home/ads-post-item",
+"partials/seller/create-post" , "partials/user-home/home-post-item-home";

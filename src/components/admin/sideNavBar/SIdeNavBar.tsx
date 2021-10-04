@@ -75,7 +75,7 @@ const navItemsSuperAdmin: INavItem [] = [
         icon: 'trello',
         subNav: [
             {
-                icon: 'trello',
+                icon: 'menu',
                 title: 'Dashboard',
                 route: 'superadmin/all-ads',
                 subNav: null
@@ -87,21 +87,56 @@ const navItemsSuperAdmin: INavItem [] = [
         route: 'superadmin/view-product',
         icon: 'shopping-bag',
         subNav: [
+            // {
+            //     icon: 'plus-circle',
+            //     title: 'Create Adds',
+            //     route: 'superadmin/category',
+            //     subNav: null
+            // },
             {
-                icon: 'menu',
-                title: 'Create Adds',
-                route: 'superadmin/ads-for-approved',
-                subNav: null
-            },
-            {
-                icon: 'plus-circle',
+                icon: 'trello',
                 title: 'View Adds',
-                route: 'superadmin/create-add',
+                route: 'superadmin/all-ads',
                 subNav: null
             }
         ]
     }
 ];
+const navItemsApprover: INavItem [] = [
+    {
+        title: 'Home',
+        route: 'superadmin',
+        icon: 'trello',
+        subNav: [
+            {
+                icon: 'menu',
+                title: 'Dashboard',
+                route: 'superadmin/all-ads',
+                subNav: null
+            }
+        ]
+    },
+    {
+        title: 'My Adds',
+        route: 'superadmin/view-product',
+        icon: 'shopping-bag',
+        subNav: [
+            // {
+            //     icon: 'plus-circle',
+            //     title: 'Create Adds',
+            //     route: 'superadmin/category',
+            //     subNav: null
+            // },
+            {
+                icon: 'trello',
+                title: 'View Adds',
+                route: 'superadmin/approver',
+                subNav: null
+            }
+        ]
+    }
+];
+
 
 const SideNavBar: React.FC = () => {
     const [ShowSideBar, setShowSideBar] = useState<boolean | null>(false);
@@ -131,18 +166,37 @@ const SideNavBar: React.FC = () => {
     const loginDetail: { loginDetails: string } = useSelector((state: RootState) => state.loginReducer);
     const [navList, setNavList] = useState<INavItem [] | null>(navItems);
     const [loginDetailsDecodes, setLoginDetailsDecodes] = useState<IloginDetails[] | null>(null);
+
+    const parseJwt =  (token: string) => {
+        try{
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }catch (e) {
+            return  "nodata";
+        }
+    };
     useEffect(() => {
-        try {
-            setLoginDetailsDecodes(jwt_decode(String(loginDetail.loginDetails ? loginDetail.loginDetails : "")));
-        } catch (e) {
-            history.push("/");
+        if(parseJwt(loginDetail.loginDetails) == "nodata"){
+            setLoginDetailsDecodes(null)
+        }else {
+            setLoginDetailsDecodes(parseJwt(loginDetail.loginDetails));
         }
     }, [loginDetail]);
 
     useEffect(() => {
-        if (!loginDetailsDecodes) return;
+        console.log(loginDetailsDecodes);
+
+        if (!loginDetailsDecodes){
+            return;
+        }
         if (loginDetailsDecodes[0].roll == "seller") {
             setNavList(navItems);
+        } else if (loginDetailsDecodes[0].roll == "requester") {
+
         } else if (loginDetailsDecodes[0].roll == "Admin") {
             setNavList(navItemsSuperAdmin);
         }

@@ -87,7 +87,7 @@ const PostDesc: React.FC<PostDescProps> = (props) => {
                     </Col>
                     <Col xs={12} sm={12} md={4} lg={3} xl={3} className="action ">
                         <VerifiedUser approved={"aprooe"}/>
-                        <Favorit postData={props.postData} componentType={"2"}/>
+                        {/*<Favorit postData={props.postData} componentType={"2"}/>*/}
                         <Button className="btn btn-success copyContact " onClick={() => {
                             copyToClipboard(postData.sellerContact);
                         }}>

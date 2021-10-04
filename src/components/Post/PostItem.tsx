@@ -154,7 +154,7 @@ const PostItem: React.FC<PostItemProps> = (props) => {
                                 props.componentType === "2" &&
                                 <Col xs={12} sm={12} md={4} lg={3} xl={3} className="action">
                                     <VerifiedUser approved={props.postData.approved}/>
-                                    <Favorit postData={props.postData} componentType={"2"}/>
+                                    {/*<Favorit postData={props.postData} componentType={"2"}/>*/}
                                     <Button className="btn  view-btn mb-4 btn btn-success "
                                             onClick={() => setModalShow(true)}>
                                         View

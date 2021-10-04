@@ -3,7 +3,7 @@ $padding-value: 12px;
 
 .admin-layout {
   min-height: 100vh;
-  font-size: 1.2em;
+  font-size: .95em;
 
   .admin-container {
     min-height: 100vh;
@@ -17,7 +17,7 @@ $padding-value: 12px;
       position: fixed;
       min-height: 100vh;
       height: 100%;
-      width: 80px;
+      width: 70px;
       font-size: .9em;
 
       .nav {
@@ -51,11 +51,11 @@ $padding-value: 12px;
       .profile-image-container {
         display: flex;
         justify-content: center;
-
+        padding-top: 10px;
         .profile-image {
           width: 40px;
-          padding-top: 20px;
-          padding-bottom: 20px;
+          height: 40px;
+          border-radius: 100%;
         }
       }
 
@@ -69,21 +69,22 @@ $padding-value: 12px;
 
       .profile-role-container {
         font-size: 0.85em;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         text-align: center;
         color: $side_nav_font_color;
         text-shadow: 1px 1px 1px rgba(26, 26, 26, 0.72);
         border-bottom: 2px solid rgba(243, 243, 243, 0.29);
-        margin-bottom: 20px;
+        //margin-bottom: 20px;
       }
     }
 
     .content-container {
       padding: 2rem 2rem 5rem 2rem;
+      margin-top: 10px;
       background-color: rgba(252, 252, 252, 0.27);
       border-radius: 0 $border-radius-value $border-radius-value 0;
       margin-left: auto !important;
-      padding-left: 80px !important;
+      padding-left: 70px !important;
       .product-form {
         font-size: 0.9em;
         background-color: rgba(178, 193, 246, 0.2);
@@ -141,8 +142,10 @@ $padding-value: 12px;
 
       .page-title {
         padding: 20px 20px 0px 20px;
-        background-color: rgba(128, 128, 128, 0.11);
+        background-color: $mygraylighter;
         color: rgba(0, 0, 0, 0.62);
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
       }
 
     }
@@ -159,6 +162,14 @@ $padding-value: 12px;
   .page-title{
     padding: 20px 20px 0px 20px;
     background-color: #4c8705;
+  }
+}
+@include media-breakpoint-down(md) {
+  .profile-image {
+    width: 30px;
+  }
+  .admin-layout{
+    font-size: .95em;
   }
 }
 @include media-breakpoint-down(xs) {

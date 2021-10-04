@@ -26,3 +26,11 @@ export const Approved_ADS = gql`
 
 `;
 
+export const SET_STATUS_CHANGE = gql`
+    mutation ChangeStatus($_id : String! $status : String! ,$message : String!){
+      changeStatusPost(status: $status, _id: $_id, message: $message){
+        isUpdated
+      }
+    }
+`;
+

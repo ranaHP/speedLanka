@@ -30,7 +30,7 @@ export const LoginReducer = (state: StoreType = getLocalStorage(), action: login
             console.log(action.payload)
             return {
                 ...state,
-                loginDetails: [action.payload]
+                loginDetails: action.payload
             }
 
         }
@@ -38,7 +38,7 @@ export const LoginReducer = (state: StoreType = getLocalStorage(), action: login
             localStorage.removeItem("loginData");
             return {
                 ...state,
-                loginDetails: {}
+                loginDetails: ""
             }
         }
         default: {
