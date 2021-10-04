@@ -3,7 +3,7 @@ $padding-value: 12px;
 
 .admin-layout {
   min-height: 100vh;
-  font-size: 1.2em;
+  font-size: .95em;
 
   .admin-container {
     min-height: 100vh;
@@ -17,7 +17,7 @@ $padding-value: 12px;
       position: fixed;
       min-height: 100vh;
       height: 100%;
-      width: 80px;
+      width: 70px;
       font-size: .9em;
 
       .nav {
@@ -69,12 +69,12 @@ $padding-value: 12px;
 
       .profile-role-container {
         font-size: 0.85em;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
         text-align: center;
         color: $side_nav_font_color;
         text-shadow: 1px 1px 1px rgba(26, 26, 26, 0.72);
         border-bottom: 2px solid rgba(243, 243, 243, 0.29);
-        margin-bottom: 20px;
+        //margin-bottom: 20px;
       }
     }
 
@@ -84,7 +84,7 @@ $padding-value: 12px;
       background-color: rgba(252, 252, 252, 0.27);
       border-radius: 0 $border-radius-value $border-radius-value 0;
       margin-left: auto !important;
-      padding-left: 80px !important;
+      padding-left: 70px !important;
       .product-form {
         font-size: 0.9em;
         background-color: rgba(178, 193, 246, 0.2);
@@ -144,6 +144,8 @@ $padding-value: 12px;
         padding: 20px 20px 0px 20px;
         background-color: $mygraylighter;
         color: rgba(0, 0, 0, 0.62);
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
       }
 
     }

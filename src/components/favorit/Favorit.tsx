@@ -1,22 +1,22 @@
 import React, {useEffect,useState} from "react";
 // import {Star} from "react-feather";
 import {Star, StarBorder} from '@material-ui/icons';
-import {IFormData} from "../../types/MainTypes";
+import {IFormData, IFormDataResponse} from "../../types/MainTypes";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/reducers/rootReducers";
 import {addFavPostItem, deletePostItem} from "../../store/actions/CheckoutActions";
 
 type FavoritProps = {
-    postData: IFormData
+    postData: IFormDataResponse
     componentType: string
 }
 const Favorit: React.FC<FavoritProps> = (props) => {
     const [isFav, setIsFav] = useState<boolean>(false);
-    const favPostList: IFormData [] = useSelector((state: RootState) => state.favPostListReducer.favPostList);
+    const favPostList: IFormDataResponse [] = useSelector((state: RootState) => state.favPostListReducer.favPostList);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let index:number = favPostList.findIndex((post:IFormData) => post._id == props.postData._id);
+        let index:number = favPostList.findIndex((post:IFormDataResponse) => post._id == props.postData._id);
         if(index == -1){
             setIsFav(false);
             return;

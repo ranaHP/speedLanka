@@ -1,36 +1,59 @@
-.register-container{
-  padding: 40px 0 50px 0px;
-  font-family: 'Montserrat', sans-serif;
-
-  h3{
-    color: $primary-color;
-  }
-
-  .my-carousel{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .form-container{
-    border: 1px dashed rgba(128, 128, 128, 0.42);
-    min-height: 20vh;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center  ;
-    padding: 30px;
-
-    .hideBTN{
-      cursor: pointer;
-    }
-
-    button{
-      margin-top: 40px;;
-    }
-  }
+*{
+  padding: 0;
+  margin: 0;
 }
+.user-login {
+  padding-top: 10px;
+  background-image: url("../../images/banners/bgsvg1.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .user-login-content {
+    width: 98%;
+    margin: auto;
+    padding-top: 10px;
+
+    .register-container{
+      padding: 40px 0 50px 0px;
+      font-family: 'Montserrat', sans-serif;
+
+      h3{
+        color: $primary-color;
+      }
+
+      .my-carousel{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-container{
+        border: 1px dashed rgba(128, 128, 128, 0.42);
+        min-height: 20vh;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center  ;
+        padding: 30px;
+
+        .hideBTN{
+          cursor: pointer;
+        }
+
+        button{
+          margin-top: 40px;;
+        }
+      }
+    }
+  }
+
+}
+
 @include media-breakpoint-down(md) {
   h3{
     padding-bottom: 40px;

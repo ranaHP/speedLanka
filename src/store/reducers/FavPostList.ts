@@ -1,4 +1,4 @@
-import {IFormData} from "../../types/MainTypes";
+import {IFormData, IFormDataResponse} from "../../types/MainTypes";
 import {FavPostListType} from "../Interfaces/inteface";
 import {ADD_FAV_POST_ITEM, DELETE_FAV_POST_ITEM} from "../constants/CheckoutConstants";
 
@@ -7,10 +7,10 @@ const initialState: StoreType = {
 }
 
 interface  StoreType {
-    favPostList: IFormData []
+    favPostList: IFormDataResponse []
 }
 
-const updateLocalStorage = (favPostList: IFormData[]) => {
+const updateLocalStorage = (favPostList: IFormDataResponse[]) => {
     localStorage.setItem('favPostList', JSON.stringify({favPostList:favPostList}));
 }
 
@@ -29,7 +29,7 @@ const getLocalStorage = ():StoreType => {
 export const FavPostList = (state:StoreType = getLocalStorage(), action: FavPostListType) => {
     switch (action.type) {
         case ADD_FAV_POST_ITEM:{
-            const index = state.favPostList.findIndex((postItem:IFormData) => postItem._id == action.payload._id);
+            const index = state.favPostList.findIndex((postItem:IFormDataResponse) => postItem._id == action.payload._id);
             if(index == -1){
                 updateLocalStorage([...state.favPostList, action.payload]);
                 return{
@@ -37,7 +37,7 @@ export const FavPostList = (state:StoreType = getLocalStorage(), action: FavPost
                     favPostList:[...state.favPostList, action.payload]
                 }
             }else {
-                const updated: IFormData[] = state.favPostList.slice();
+                const updated: IFormDataResponse[] = state.favPostList.slice();
                 updated[index] = action.payload;
                 updateLocalStorage(updated);
                 return{
@@ -48,7 +48,7 @@ export const FavPostList = (state:StoreType = getLocalStorage(), action: FavPost
 
         }
         case DELETE_FAV_POST_ITEM:{
-            const postList  =  state.favPostList.filter((postItem: IFormData, index: number) => postItem._id !== action.payload);
+            const postList  =  state.favPostList.filter((postItem: IFormDataResponse, index: number) => postItem._id !== action.payload);
             updateLocalStorage(postList);
             
             return{

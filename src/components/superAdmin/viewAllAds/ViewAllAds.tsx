@@ -45,9 +45,7 @@ const ViewAllAdsSuperAdmin: React.FC = () => {
                 (!formData.statusType ? true : post.approved.toLowerCase().includes(formData.statusType.value.toLowerCase()))
             ) {
                 return true;
-                console.log("true");
             }
-            console.log("false");
             return false;
         }))
     }
@@ -124,7 +122,8 @@ const ViewAllAdsSuperAdmin: React.FC = () => {
                         </Col>
                     </Row>
 
-                    {!allPostList &&
+                    {filteredPostList &&
+                        filteredPostList.length == 0 &&
                     <NoItemFound componentType={"1"}/>
                     }
                 </div>

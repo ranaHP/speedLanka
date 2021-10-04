@@ -1,0 +1,111 @@
+.search-title{
+  text-align: center;
+  .title{
+    font-size: 2.3em;
+    margin-top: 10px;
+  }
+  .title-sub{
+    font-size: 1.2em;
+    margin-bottom: 40px;
+  }
+}
+.home-search{
+  width: 100%;
+  text-align: center;
+  margin: 40px 0;
+  .user-product-search{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    .item{
+      min-width: 200px;
+      margin-right: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      //align-items: center;
+      .user-search-btn{
+        width: 100%;
+        height: 68%;
+      }
+      .item-label{
+        color: rgba(0, 0, 0, 0.7);
+        font-size: .95em;
+      }
+      .item-btn{
+        height: 47px;
+        border-radius: 3px;
+        border: 1px solid rgba(128, 128, 128, 0.38);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+      }
+      .css-yk16xz-control{
+        height: 48px !important;
+      }
+
+      .css-yk16xz-control:active{
+        height: 48px !important;
+      }
+      .css-zk88xw-singleValue{
+        color: rgba(0, 0, 0, 0.62) !important;
+      }
+      .inputField{
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        background-color: transparent;
+      }
+    }
+
+  }
+
+
+}
+
+
+
+@include media-breakpoint-down(lg) {
+  .home-search{
+    margin-bottom: 40px;
+    margin-top: 40px;
+    background-color: rgba(252, 204, 26, 0.06);
+    .title{
+      font-size: 2.3em;
+      margin-top: 00px;
+    }
+    .title-sub{
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    .user-product-search{
+     flex-direction: column;
+      .item{
+        min-width: 200px;
+        width: 500px;
+        margin: auto;
+        margin-bottom: 10px;
+        .user-search-btn{
+          width: 100%;
+          height: 78%;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .home-search{
+    .user-product-search{
+      .item{
+        width: 100%;
+      }
+    }
+  }
+}
