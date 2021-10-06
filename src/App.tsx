@@ -18,6 +18,7 @@ import {
 import MainView from "./views/mainView";
 import Home from "./views/Home";
 import UserHome from "./components/Home/Home";
+import WeddingSearchHome from "./components/weeding/WeddingSearchHome";
 
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
                     </Route>
                     <Route path="/product/:loc/:cat/:tit">
                         <MainView/>
+                    </Route>
+                    <Route path="/wedding">
+                        <WeddingSearchHome/>
                     </Route>
                     <Route path="/login">
                         <Login/>

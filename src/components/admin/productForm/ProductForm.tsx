@@ -440,7 +440,7 @@ const ProductForm: React.FC = () => {
                 }
                 <Button variant="primary" className="btn btn-primary float-end mb-4" type="submit">
                     {
-                        loading ? "loading...." : "Add Advertisement"
+                        loading ? "loading...." : "Create Advertisement"
                     }
                 </Button>
 

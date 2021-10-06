@@ -8,6 +8,7 @@ import HomeSearch from "./HomeSearch/HomeSearch";
 import HomeLatedAds from "./HomeLatedAds/HomeLatedAds";
 import HomeSearchWedding from "./HomeSearchWedding/HomeSearchWedding";
 import {useHistory} from "react-router-dom";
+import WeddingSearch from "../weeding/WeddingSearch/WeddingSearch";
 export const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -51,50 +52,19 @@ const UserHome : React.FC = ( ) => {
         }
          history.push("/product/"+locationTemp+"/"+categoryTemp+"/"+titleTemp);
     }
-
+    const handleOnWeddingSearch = (looking :string, ageStart: number , ageTo: number  , religion:string , motherTongue:string , job:string) => {
+    }
     return (
         <div className="user-home">
             {/*<Image src={BgBanner1} width="100%" />*/}
             <div className="content">
-
                 <HomeHeader/>
                 <HomeHero/>
                 <HomeSearch onSearch={handleOnSearch}/>
                 <HomeCategory/>
                 <HomeLatedAds/>
-                <HomeSearchWedding/>
+                <WeddingSearch onSearch={handleOnWeddingSearch}/>
 
-
-
-                {/*<div className="latest-post-classified ">*/}
-                {/*    <div className="title"> Latest Post  </div>*/}
-                {/*    <div className="title-sub"> SpeedLanka Classified Portal  </div>*/}
-                {/*    <div className="latest-post-card-container ">*/}
-                {/*        <Carousel*/}
-                {/*            swipeable={true}*/}
-                {/*            draggable={true}*/}
-                {/*            showDots={true}*/}
-                {/*            responsive={responsive}*/}
-                {/*            ssr={true} // means to render carousel on server-side.*/}
-                {/*            infinite={true}*/}
-                {/*            // autoPlay={true}*/}
-                {/*            autoPlaySpeed={1000}*/}
-                {/*            keyBoardControl={true}*/}
-                {/*            customTransition="all 1.5"*/}
-                {/*            transitionDuration={500}*/}
-                {/*            containerClass="carousel-container"*/}
-                {/*            removeArrowOnDeviceType={["tablet", "mobile"]}*/}
-
-                {/*            dotListClass="custom-dot-list-style"*/}
-                {/*            itemClass="new-post-card"*/}
-                {/*        >*/}
-                {/*            <WeddingPostItem/>*/}
-                {/*            <WeddingPostItem/>*/}
-                {/*            <WeddingPostItem/>*/}
-                {/*            <WeddingPostItem/>*/}
-                {/*        </Carousel>;*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
             <HomeFooter/>
         </div>

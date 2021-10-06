@@ -19,6 +19,7 @@ import {RootState} from "../../store/reducers/rootReducers";
 import AlertSystem from "../alertSystem/AlertSystem";
 import {IloginDetails} from "../../store/Interfaces/inteface";
 import jwt_decode from "jwt-decode";
+import AddWeddingPost from "./addWeddingPost/AddWeddingPost";
 
 const DashBoard: React.FC = () => {
     let {path, url} = useRouteMatch();
@@ -60,6 +61,12 @@ const DashBoard: React.FC = () => {
                         </Route>
                         <Route path={`${path}/view-add`}>
                             <ViewPost/>
+                        </Route>
+                        <Route path={`${path}/create-wedding-add`}>
+                            <AddWeddingPost/>
+                        </Route>
+                        <Route path={`${path}/view-wedding-add`}>
+                            {/*<ViewPost/>*/}
                         </Route>
                         <Route exact path={path}>
                             {/*<DashBoardHome/>*/}

@@ -1,0 +1,69 @@
+.side-navbar {
+  background-color: $side_nav_bg_color;
+  border-radius: $border-radius-value 0 0 $border-radius-value;
+  box-shadow: 3px 0 3px rgba(90, 90, 90, 0.46);
+  z-index: 500;
+  position: fixed;
+  min-height: 100vh;
+  height: 100%;
+  width: 90px;
+  font-size: .9em;
+
+  .nav {
+    display: flex;
+    margin-top: 60px;
+    .nav-link {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      text-shadow: 1px 1px 1px rgba(26, 26, 26, 0.72);
+      padding: 0;
+      margin: 0;
+      font-size: 0.98em;
+      transition: .3s;
+    }
+  }
+  .nav-icon{
+    background-color: $side_nav_bg_color;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.33);
+    padding: 15px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .nav-icon:hover{
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.61);
+    background-color: #4c8705;
+    transition: .3s;
+    border-radius: 5px;
+  }
+  .profile-image-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    .profile-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+    }
+  }
+
+
+  .profile-title-container {
+    font-size: 1.2em;
+    text-align: center;
+    color: $side_nav_font_color;
+    text-shadow: 1px 1px 1px rgba(26, 26, 26, 0.8);
+  }
+
+  .profile-role-container {
+    font-size: 0.85em;
+    padding-bottom: 10px;
+    text-align: center;
+    color: $side_nav_font_color;
+    text-shadow: 1px 1px 1px rgba(26, 26, 26, 0.72);
+    border-bottom: 2px solid rgba(243, 243, 243, 0.29);
+    //margin-bottom: 20px;
+  }
+}

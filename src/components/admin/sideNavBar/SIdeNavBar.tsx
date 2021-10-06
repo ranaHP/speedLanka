@@ -35,34 +35,53 @@ const tempNavItems: INavItem [] = [
 
 ];
 const navItems: INavItem [] = [
-    // {
-    //     title: 'Home',
-    //     route: 'dashboard',
-    //     icon : 'trello',
-    //     subNav: [
-    //         {
-    //             icon : 'trello',
-    //             title: 'Dashboard',
-    //             route: 'dashboard',
-    //             subNav: null
-    //         }
-    //     ]
-    // },
     {
-        title: 'My Adds',
+        title: 'Home',
+        route: 'dashboard',
+        icon : 'trello',
+        subNav: [
+            {
+                icon : 'trello',
+                title: 'Dashboard',
+                route: 'dashboard',
+                subNav: null
+            }
+        ]
+    },
+    {
+        title: 'Post',
         route: 'dashboard/',
         icon: 'shopping-bag',
         subNav: [
             {
                 icon: 'menu',
-                title: 'Create Adds',
+                title: 'Create',
                 route: 'dashboard/view-add',
                 subNav: null
             },
             {
                 icon: 'plus-circle',
-                title: 'View Adds',
+                title: 'List',
                 route: 'dashboard/create-add',
+                subNav: null
+            }
+        ]
+    }
+    ,{
+        title: 'wedding',
+        route: 'dashboard/',
+        icon: 'shopping-bag',
+        subNav: [
+            {
+                icon: 'menu',
+                title: 'Create',
+                route: 'dashboard/view-wedding-add',
+                subNav: null
+            },
+            {
+                icon: 'plus-circle',
+                title: 'List',
+                route: 'dashboard/create-wedding-add',
                 subNav: null
             }
         ]
@@ -220,13 +239,13 @@ const SideNavBar: React.FC = () => {
                                             {/*{handleOnReturnIcon(navitem.icon)}*/}
                                             {/*&nbsp;*/}
                                             {/*&nbsp;*/}
-                                            {/*{navitem.title}*/}
+                                            {navitem.title}
                                             {
                                                 navitem.subNav &&
                                                 navitem.subNav.map((subNav: INavItem) => {
                                                     return (
                                                         <Link to={`/${subNav.route}`} key={subNav.route}>
-                                                            <div className="nav-icon">
+                                                            <span title={subNav.title}><div className="nav-icon">
 
                                                                 <div className="nav-link">
 
@@ -236,6 +255,7 @@ const SideNavBar: React.FC = () => {
                                                                 </div>
 
                                                             </div>
+                                                            </span>
                                                         </Link>
                                                     )
                                                 })

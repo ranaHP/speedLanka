@@ -89,3 +89,29 @@ export interface ICategoryOption {
     name: string
     subCategory: string
 }
+
+export interface IWeddingResponse {
+    _id : string
+    fname: string
+    lname: string
+    age: string
+    email: string
+    gender: string
+    mobile: string
+    bodyType: string
+    height: string
+    image: string
+    approved: string
+    date: string
+    maritalStatus: string
+    dob: string
+    message: string
+    location: string
+    nationality: string
+    religion: string
+    educationLevel: string
+    job: string
+    language: string
+    lagnaya: string
+    desc: string
+}
