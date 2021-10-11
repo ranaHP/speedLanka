@@ -9,7 +9,7 @@ type PostItemProps = {
 const NoItemFound: React.FC<PostItemProps> = (props) => {
 
     return (
-        <Col xs={12} sm={12} md={12} lg={11} xl={11} className="m-auto  postItem">
+        <Col xs={12} sm={12} md={12} lg={11} xl={11} className="m-auto  ">
             <Row className="p-5 m-0 text-center text-muted ">
                 <h6>  <Spinner
                     as="span"
