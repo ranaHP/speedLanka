@@ -63,7 +63,8 @@ const HomeHeader : React.FC = ( ) => {
                 <Link to="/product/all/all/all">Buy</Link>
                 <div style={{cursor: "pointer"}}
                      onClick={handleOnCheckIsLoged}
-                     className="special-nav">Sell</div>
+                     className="special-nav">Post Ads</div>
+
             </div>
             <div className="user-home-login-register">
                 <div className="language">

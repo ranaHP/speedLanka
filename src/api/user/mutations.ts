@@ -48,7 +48,7 @@ export const CREATE_POST = gql`
       $sellerContact: String !,
       $images: String !,
       $approved: String !,
-      $date: DateTime !,
+      $date: String !,
       $sellerVerified: String !,
       $attribute: String !
     ){

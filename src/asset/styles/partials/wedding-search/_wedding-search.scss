@@ -1,0 +1,97 @@
+.search-wedding-home{
+  padding-top: 10px;
+  background-image: url("../../../images/banners/bgsvg1.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  .wedding-profile-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+
+.wedding-home-search{
+  width: 100%;
+  text-align: center;
+  margin: 40px 0;
+  .user-product-search{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    flex-wrap: wrap;
+    .item{
+      min-width: 200px;
+      margin-right: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      //align-items: center;
+      .user-search-btn{
+        width: 100%;
+        height: 38px;
+        margin-top: 10px ;
+      }
+      .item-label{
+        color: rgba(0, 0, 0, 0.7);
+        font-size: .95em;
+      }
+      .item-btn{
+        height: 35px;
+        border-radius: 3px;
+        border: 1px solid rgba(128, 128, 128, 0.38);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(0, 0, 0, 0.7);
+        cursor: pointer;
+      }
+    }
+
+  }
+
+
+}
+
+
+
+@include media-breakpoint-down(lg) {
+  .home-search{
+    margin-bottom: 40px;
+    margin-top: 40px;
+    background-color: rgba(252, 204, 26, 0.06);
+    .title{
+      font-size: 2.3em;
+      margin-top: 00px;
+    }
+    .title-sub{
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+    .user-product-search{
+      flex-direction: column;
+      .item{
+        min-width: 200px;
+        width: 500px;
+        margin: auto;
+        margin-bottom: 10px;
+        .user-search-btn{
+          width: 100%;
+          height: 78%;
+        }
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .home-search{
+    .user-product-search{
+      .item{
+        width: 100%;
+      }
+    }
+  }
+}
