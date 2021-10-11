@@ -36,9 +36,9 @@ const WeddingSearchHome : React.FC = ( ) => {
                 gender : looking,
                 ageFrom : ageStart,
                 ageTo : ageTo,
-                religion : "",
-                language : "",
-                job : "",
+                religion : religion,
+                language : motherTongue,
+                job : job,
             }
         }
     );
@@ -79,34 +79,31 @@ const WeddingSearchHome : React.FC = ( ) => {
                         <Col xs={12} sm={12} md={12} lg={12} xl={12} className="p-0 m-0 pt-3 m-auto ">
                             <WeddingSearch onSearch={handleOnSearch}  />
                             <Row className="m-0 p-0 ads-post-container">
-                                {/*{filteredPostList &&*/}
-                                {/*filteredPostList.map((post: IWeddingResponse, index) => {*/}
-                                {/*    return  <h1>Hansana</h1>*/}
 
-                                {/*})*/}
-                                {/*}*/}
-                                {/*{*/}
-                                {/*    loading &&   <h6>  <Spinner*/}
-                                {/*        as="span"*/}
-                                {/*        animation="grow"*/}
-                                {/*        size="sm"*/}
-                                {/*        role="status"*/}
-                                {/*        aria-hidden="true"*/}
-                                {/*    /></h6>*/}
 
-                                {/*}*/}
+                                <Row className="wedding-profile-container text-center">
 
-                                <Row className="wedding-profile-container">
-                                    <WeddingProfileCard/>
-                                    <WeddingProfileCard/>
-                                    <WeddingProfileCard/>
-                                    <WeddingProfileCard/>
-                                    <WeddingProfileCard/>
+                                    {filteredPostList &&
+                                    filteredPostList.map((post: IWeddingResponse, index) => {
+                                        return  <WeddingProfileCard WeddingPost={post}/>
 
+                                    })
+                                    }
+                                    {
+                                            loading &&   <h6>  <Spinner
+                                            as="span"
+                                            animation="grow"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                        /></h6>
+
+                                    }
+                                    {filteredPostList == [] &&
+                                    <NoItemFound componentType={"1"}/>
+                                    }
                                 </Row>
-                                {!filteredPostList &&
-                                <NoItemFound componentType={"1"}/>
-                                }
+
                             </Row>
                             <Pagination></Pagination>
                         </Col>

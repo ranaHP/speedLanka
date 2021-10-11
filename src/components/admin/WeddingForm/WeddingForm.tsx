@@ -16,6 +16,9 @@ import {
     optionsNationality, optionsReligion
 } from "../../../config/wedding";
 import UserLocationSearch from "../../userSearchLocation/UserLocationSearch";
+import {useMutation} from "@apollo/client";
+import {CREATE_POST} from "../../../api/user/mutations";
+import {Create_Wedding_Post} from "../../../api/admin/mutations";
 const options: IOption[] = [
 ]
 const WeddingForm: React.FC = () => {
@@ -31,6 +34,10 @@ const WeddingForm: React.FC = () => {
     const [imageUploadName1, setImageUploadName1] = useState<string >("");
     const [imageUrl1, setImageUrl1] = useState<string>("");
     const [isLoading, setisLoading] = useState<boolean >(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+
+
+    const [createWeddingPostMutation, { data, loading, error}] = useMutation(Create_Wedding_Post);
 
     const getImage = (e: any , number:number) => {
         const files = e.target.files;
@@ -52,8 +59,97 @@ const WeddingForm: React.FC = () => {
     }
     setAgeStartOption();
     const onSubmit = async (formData: any) => {
-        if(city == "Select location") return;
-        console.log(formData)
+        if(city === "Select location") return;
+        console.log(formData);
+        console.log({variables: {
+                _id: formData.fname + formData.lname,
+                fname: formData.fname,
+                lname: formData.lname,
+                age: Number(formData.age.value),
+                email: formData.email,
+                gender: formData.gender.value,
+                mobile: formData.mobile,
+                bodyType: formData.bodyType.value,
+                height: Number(formData.height),
+                image: formData.images1[0].name,
+                approved: "not",
+                date: (new Date()).toDateString(),
+                maritalStatus: formData.maritalStatus.value,
+                dob: formData.dob,
+                message: "",
+                location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
+                nationality: formData.nationality.value,
+                desc: formData.desc,
+                lagnaya: formData.lagnaya.value,
+                language: formData.language.value,
+                job: formData.job.value,
+                educationLevel: formData.educationLevel,
+                religion: formData.religion.value,
+            }});
+        try {
+            const data = new Date();
+            const newPost = await createWeddingPostMutation({
+                variables: {
+                    _id: formData.fname + formData.lname,
+                    fname: formData.fname,
+                    lname: formData.lname,
+                    age: Number(formData.age.value),
+                    email: formData.email,
+                    gender: formData.gender.value,
+                    mobile: formData.mobile,
+                    bodyType: formData.bodyType.value,
+                    height: Number(formData.height),
+                    image: formData.images1[0].name,
+                    approved: "not",
+                    date: (new Date()).toDateString(),
+                    maritalStatus: formData.maritalStatus.value,
+                    dob: formData.dob,
+                    message: "",
+                    location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
+                    nationality: formData.nationality.value,
+                    desc: formData.desc,
+                    lagnaya: formData.lagnaya.value,
+                    language: formData.language.value,
+                    job: formData.job.value,
+                    educationLevel: formData.educationLevel,
+                    religion: formData.religion.value,
+                }
+            });
+            setProvince("");
+            setDistrict("")
+            setCity("Select city");
+            setImageUrl1("");
+            setTimeout(() => {
+                reset();
+            }, 1000)
+            toast.success('Post Successfully Added!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } catch (e) {
+            // console.log(e);
+            setErrorMessage("This name already used!");
+            toast.error('Wedding post is not successfully added!', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            if (error) {
+                setErrorMessage("This name already used! !");
+            }
+            ;
+        }
+
+
     }
 
     const customStyles = {
@@ -344,7 +440,7 @@ const WeddingForm: React.FC = () => {
                 </div>
                 <Button variant="primary" className="btn btn-primary float-end mb-4" type="submit">
                     {
-                        1 ? "loading...." : "create post"
+                        loading ? "loading...." : "create post"
                     }
                 </Button>
 

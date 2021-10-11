@@ -106,8 +106,12 @@ a:focus {
   margin: 5px auto;
 }
 
+.profile-card-4-container{
+  width: fit-content;
+  max-width: 320px;
+}
 .profile-card-4 {
-  //max-width: 300px;
+  min-width: 300px;
   background-color: #FFF;
   border-radius: 5px;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
