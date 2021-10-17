@@ -9,10 +9,13 @@ import WeddingSearch from "./WeddingSearch/WeddingSearch";
 import WeddingProfileCard from "./WeddingProfileCard/WeddingProfileCard";
 import {GET_SEARCH_Wedding_POST} from "../../api/admin/queries";
 import {useQuery} from "@apollo/client";
+import {useParams} from "react-router-dom";
+// import {searchUrlParameter} from "../../views/Home";
 
 export interface IGetUserSearchWeddingPost {
     getWeddingPostsSearch: IWeddingResponse[]
 };
+export interface searchWeddingUrlParameter {looking: string, ageFrom: string, ageTo: string, religion: string, mTongue: string, job: string}
 const WeddingSearchHome : React.FC = ( ) => {
     const [filteredPostList, setFilteredPostList] = useState<IWeddingResponse [] | null>(null);
     const [allPostList, setAllPostList] = useState<IWeddingResponse [] | null>(null);
@@ -22,6 +25,27 @@ const WeddingSearchHome : React.FC = ( ) => {
     const [religion, setReligion] = useState<string>("");
     const [motherTongue, setMotherTongue] = useState<string>("");
     const [job, setJob] = useState<string>("");
+    let urlParameters  = useParams<searchWeddingUrlParameter>();
+    useEffect(() => {
+        if(urlParameters.looking == 'all'){
+            setLooking("");
+            console.log("a")
+        }else{
+            let lookingTemp = urlParameters.looking.replaceAll("-" , "/");
+            setLooking(lookingTemp);
+        }
+        // if(urlParameters.cat == 'all'){
+        //
+        // }else{
+        //     let catTemp = urlParameters.cat.replaceAll("-" , "/");
+        //     setCategory(catTemp);
+        // }
+        // if(urlParameters.tit == 'all'){
+        //
+        // }else{
+        //     setTitle(urlParameters.tit);
+        // }
+    }, [urlParameters]);
 
     const {refetch, loading, error, data} = useQuery<IGetUserSearchWeddingPost, {
         gender : string,

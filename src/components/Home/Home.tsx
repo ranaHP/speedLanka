@@ -9,6 +9,7 @@ import HomeLatedAds from "./HomeLatedAds/HomeLatedAds";
 import HomeSearchWedding from "./HomeSearchWedding/HomeSearchWedding";
 import {useHistory} from "react-router-dom";
 import WeddingSearch from "../weeding/WeddingSearch/WeddingSearch";
+import HomeLatestWeddingAds from "./HomeLatedWeddingAds/HomeLatestWeddingAds";
 export const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -64,7 +65,7 @@ const UserHome : React.FC = ( ) => {
                 <HomeCategory/>
                 <HomeLatedAds/>
                 <WeddingSearch onSearch={handleOnWeddingSearch}/>
-
+                <HomeLatestWeddingAds/>
             </div>
             <HomeFooter/>
         </div>

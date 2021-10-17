@@ -36,7 +36,7 @@ function App() {
                     <Route path="/product/:loc/:cat/:tit">
                         <MainView/>
                     </Route>
-                    <Route path="/wedding">
+                    <Route path="/wedding/:looking/:ageFrom/:ageTo/:religion/:mTongue/:job">
                         <WeddingSearchHome/>
                     </Route>
                     <Route path="/login">

@@ -126,6 +126,7 @@ const ViewPost: React.FC = () => {
                 </Form>
                 <Row className=" m-0 p-0 m-auto ">
                     <Col xs={12} sm={12} md={12} lg={11} xl={11} className=" m-0 p-0 m-auto ">
+
                         <Table striped bordered hover responsive>
                             <thead>
                             <tr>
@@ -153,6 +154,14 @@ const ViewPost: React.FC = () => {
                                     )
                                 })
                             }
+
+                            {
+                                !filteredPostList &&
+                                    // <h1> {filteredPostList.length }asdas</h1>
+                                    // <NoItemFound componentType={"1"}></NoItemFound>
+                                <h1> Hansana Ranawera </h1>
+                            }
+                            <h1> Hansana Ranawera </h1>
                             </tbody>
                         </Table>
                     </Col>

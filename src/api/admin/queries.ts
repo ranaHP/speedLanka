@@ -78,6 +78,37 @@ export  const GET_ALL_Wedding_POST = gql`
     }
 
 `;
+
+export  const GET_ALL_Wedding_POST_LIMIT = gql`
+    query GetLimitedWeddingPost{
+         WeddingPostslimit{
+            _id
+            fname
+            lname
+            age
+            email
+            gender
+            mobile
+            bodyType
+            height
+            image
+            approved
+            date
+            maritalStatus
+            dob
+            message
+            location
+            nationality
+            religion
+            educationLevel
+            job
+            language
+            lagnaya
+            desc
+          }
+    }
+
+`;
 export  const GET_SEARCH_Wedding_POST = gql`
     query getWeddingPostSearch(
         $gender : String!
