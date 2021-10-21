@@ -158,10 +158,10 @@ const ViewPost: React.FC = () => {
                             {
                                 !filteredPostList &&
                                     // <h1> {filteredPostList.length }asdas</h1>
-                                    // <NoItemFound componentType={"1"}></NoItemFound>
-                                <h1> Hansana Ranawera </h1>
+                                    <NoItemFound componentType={"1"}></NoItemFound>
+                               
                             }
-                            <h1> Hansana Ranawera </h1>
+
                             </tbody>
                         </Table>
                     </Col>

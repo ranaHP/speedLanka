@@ -20,6 +20,8 @@ import AlertSystem from "../alertSystem/AlertSystem";
 import {IloginDetails} from "../../store/Interfaces/inteface";
 import jwt_decode from "jwt-decode";
 import AddWeddingPost from "./addWeddingPost/AddWeddingPost";
+import CreatePostHome from "./createPostHome/CreatePostHome";
+import ViewPostHome from "./ViewPostHome/ViewPostHome";
 
 const DashBoard: React.FC = () => {
     let {path, url} = useRouteMatch();
@@ -56,21 +58,33 @@ const DashBoard: React.FC = () => {
                 <Col xs={12} sm={12} md={12} lg={12} xl={12} className="content-container p-0 m-0">
                     <MainNavBar componentType={"1"}/>
                     <Switch>
+                        <Route path={`${path}/create-post-home`}>
+                            <CreatePostHome/>
+                        </Route>
+                        <Route path={`${path}/view-post-home`}>
+                            <ViewPostHome/>
+                        </Route>
+
+
                         <Route path={`${path}/create-add`}>
                             <CreateAdd/>
                         </Route>
-                        <Route path={`${path}/view-add`}>
-                            <ViewPost/>
-                        </Route>
-                        <Route path={`${path}/create-wedding-add`}>
+                        <Route path={`${path}/create-wedding`}>
                             <AddWeddingPost/>
                         </Route>
-                        <Route path={`${path}/view-wedding-add`}>
+
+
+                        <Route path={`${path}/view-post`}>
+                            <ViewPost/>
+                        </Route>
+                        <Route path={`${path}/view-wedding`}>
                             {/*<ViewPost/>*/}
                         </Route>
                         <Route exact path={path}>
                             {/*<DashBoardHome/>*/}
-                            <ViewPost/>
+                            {/*<ViewPost/>*/}                           <CreatePostHome/>
+
+
                         </Route>
                     </Switch>
                 </Col>

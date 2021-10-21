@@ -14,6 +14,7 @@ import {useParams} from "react-router-dom";
 
 export interface IGetUserSearchWeddingPost {
     getWeddingPostsSearch: IWeddingResponse[]
+    // onSearch: (looking: string, ageFrom: string, ageTo: string, religion: string, mTongue: string, job: string) => void
 };
 export interface searchWeddingUrlParameter {looking: string, ageFrom: string, ageTo: string, religion: string, mTongue: string, job: string}
 const WeddingSearchHome : React.FC = ( ) => {
@@ -29,22 +30,45 @@ const WeddingSearchHome : React.FC = ( ) => {
     useEffect(() => {
         if(urlParameters.looking == 'all'){
             setLooking("");
-            console.log("a")
         }else{
-            let lookingTemp = urlParameters.looking.replaceAll("-" , "/");
+            let lookingTemp = urlParameters.looking;
             setLooking(lookingTemp);
         }
-        // if(urlParameters.cat == 'all'){
-        //
-        // }else{
-        //     let catTemp = urlParameters.cat.replaceAll("-" , "/");
-        //     setCategory(catTemp);
-        // }
-        // if(urlParameters.tit == 'all'){
-        //
-        // }else{
-        //     setTitle(urlParameters.tit);
-        // }
+
+        if(urlParameters.ageFrom == 'all'){
+            setAgeStart(18);
+        }else{
+            let ageFromTemp = Number(urlParameters.ageFrom);
+            setAgeTo(ageFromTemp);
+        }
+        if(urlParameters.ageTo  == 'all'){
+            setAgeTo(75);
+        }else{
+            let ageToTemp = urlParameters.ageTo;
+            setMotherTongue(ageToTemp);
+        }
+        if(urlParameters.religion == 'all'){
+            setReligion("");
+        }else{
+            let religionTemp = urlParameters.religion;
+            setReligion(religionTemp);
+        }
+
+        if(urlParameters.mTongue == 'all'){
+            setMotherTongue("");
+        }else{
+            let mTongueTemp = urlParameters.mTongue;
+            setMotherTongue(mTongueTemp);
+        }
+
+
+        if(urlParameters.job == 'all'){
+            setJob("");
+        }else{
+            let jobTemp = urlParameters.job;
+            setJob(jobTemp);
+        }
+
     }, [urlParameters]);
 
     const {refetch, loading, error, data} = useQuery<IGetUserSearchWeddingPost, {

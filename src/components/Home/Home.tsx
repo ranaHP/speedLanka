@@ -54,6 +54,25 @@ const UserHome : React.FC = ( ) => {
          history.push("/product/"+locationTemp+"/"+categoryTemp+"/"+titleTemp);
     }
     const handleOnWeddingSearch = (looking :string, ageStart: number , ageTo: number  , religion:string , motherTongue:string , job:string) => {
+        if(looking.toLowerCase() == ""){
+            looking = 'all';
+        }
+        if(ageTo == 0){
+            ageTo = 18;
+        }
+        if(ageStart == 0){
+            ageStart = 75;
+        }
+        if(religion.toLowerCase() == ""){
+            religion = 'all';
+        }
+        if(motherTongue.toLowerCase() == ""){
+            motherTongue = 'all';
+        }
+        if(job.toLowerCase() == ""){
+            job = 'all';
+        }
+        history.push("/wedding/"+looking+"/"+ageStart+"/"+ageTo+"/"+religion+"/"+motherTongue+"/"+job);
     }
     return (
         <div className="user-home">

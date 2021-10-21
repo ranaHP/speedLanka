@@ -1,14 +1,26 @@
 import React from 'react';
 import {MapPin} from "react-feather";
 import {IWeddingResponse} from "../../../types/MainTypes";
+import {Button} from "react-bootstrap";
+import UserPostPopup from "../../userPostPopup/UserPostPopup";
+import UserWeddingPostPopup from "../../userWeddingPostPopup/UserWeddingPostPopup";
 
 type WeddingProfileCardProps = {
     WeddingPost: IWeddingResponse
 }
 const WeddingProfileCard: React.FC<WeddingProfileCardProps> = (props) => {
+    const [modalPostPopupShow, setModalPostPopupShow] = React.useState(false);
     return (
         <div className="profile-card-4-container m-2">
-            <div className="profile-card-4 text-center">
+            <UserWeddingPostPopup onHide={() => {
+                setModalPostPopupShow(false)
+            }} show={modalPostPopupShow} postData={props.WeddingPost}/>
+            {/*<Button className="btn btn-danger view-more-btn" onClick={() => {*/}
+            {/*    setModalPostPopupShow(true)*/}
+            {/*}}> View Post</Button>*/}
+            <div className="profile-card-4 text-center" onClick={() => {
+                setModalPostPopupShow(true)
+            }}>
                 <img
                     src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg"
                     className="img img-responsive"/>
