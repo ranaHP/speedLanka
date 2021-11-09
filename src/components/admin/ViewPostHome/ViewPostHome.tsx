@@ -23,8 +23,8 @@ const ViewPostHome : React.FC = ( ) => {
                             <Card.Text>
                                 With supporting text below as a natural lead-in to additional content.
                             </Card.Text>
-                            <Link to={`/dashboard/create-add`} >
-                                <Button variant="primary" >Wedding Post</Button>
+                            <Link to={`/dashboard/view-wedding`} >
+                                <Button variant="primary" >View Wedding Post</Button>
                             </Link>
                         </Card.Body>
                         <Card.Footer className="text-muted">Speedlanka.lk</Card.Footer>
@@ -37,8 +37,8 @@ const ViewPostHome : React.FC = ( ) => {
                             <Card.Text>
                                 With supporting text below as a natural lead-in to additional content.
                             </Card.Text>
-                            <Link to={`/dashboard/create-wedding`} >
-                                <Button variant="primary">Sell Item</Button>
+                            <Link to={`/dashboard/view-post`} >
+                                <Button variant="primary">View Sell Item</Button>
                             </Link>
                         </Card.Body>
                         <Card.Footer className="text-muted">Speedlanka.lk</Card.Footer>

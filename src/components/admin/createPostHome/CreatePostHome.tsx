@@ -24,7 +24,7 @@ const CreatePostHome : React.FC = ( ) => {
                                 With supporting text below as a natural lead-in to additional content.
                             </Card.Text>
                             <Link to={`/dashboard/create-add`} >
-                                <Button variant="primary" >Wedding Post</Button>
+                                <Button variant="primary" >Create Wedding Post</Button>
                             </Link>
                         </Card.Body>
                         <Card.Footer className="text-muted">Speedlanka.lk</Card.Footer>
@@ -38,7 +38,7 @@ const CreatePostHome : React.FC = ( ) => {
                                 With supporting text below as a natural lead-in to additional content.
                             </Card.Text>
                             <Link to={`/dashboard/create-wedding`} >
-                                <Button variant="primary">Sell Item</Button>
+                                <Button variant="primary">Create Sell Item</Button>
                             </Link>
                         </Card.Body>
                         <Card.Footer className="text-muted">Speedlanka.lk</Card.Footer>

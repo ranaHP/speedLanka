@@ -26,7 +26,7 @@ const HomeHeader : React.FC = ( ) => {
         if(!loginDetailsDecodes){
             history.push("/login");
         }else{
-            history.push("/dashboard");
+            history.push("/dashboard/create-post-home");
         }
     }
 
@@ -60,7 +60,7 @@ const HomeHeader : React.FC = ( ) => {
             </div>
             <div className="user-home-navbar">
                 <Link to="/">Home</Link>
-                <Link to="/wedding">Wedding</Link>
+                <Link to="/wedding/all/75/18/all/all/all">Wedding</Link>
                 <Link to="/product/all/all/all">Buy</Link>
                 <div style={{cursor: "pointer"}}
                      onClick={handleOnCheckIsLoged}

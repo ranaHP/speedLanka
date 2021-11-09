@@ -72,7 +72,7 @@ const WeddingForm: React.FC = () => {
                 bodyType: formData.bodyType.value,
                 height: Number(formData.height),
                 image: formData.images1[0].name,
-                approved: "not",
+                approved: "pending",
                 date: (new Date()).toDateString(),
                 maritalStatus: formData.maritalStatus.value,
                 dob: formData.dob,

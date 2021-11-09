@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PageTitle from "../pageTitle/PageTitle";
-import {IAttribute, IFormData, IFormDataResponse, IOption} from "../../../types/MainTypes";
+import {IAttribute, IFormData, IFormDataResponse, IOption, IWeddingResponse} from "../../../types/MainTypes";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store/reducers/rootReducers";
 import {IloginDetails} from "../../../store/Interfaces/inteface";
@@ -13,6 +13,7 @@ import {useForm, Controller} from "react-hook-form";
 import Select from "react-select";
 import PostTableRow from "../PostTableRow/PostTableRow";
 import {GET_Wedding_POST_FOR_SELLER} from "../../../api/admin/queries";
+import WeddingPostTableRow from "../WeddingPostTableRow/WeddingPostTableRow";
 
 export const postTypes: IOption [] = [
     {
@@ -32,19 +33,19 @@ export const postTypes: IOption [] = [
     }
 ]
 
-export interface IGetUserPost {
-    getPost: IFormDataResponse[]
+export interface IGetUserWeddingPost {
+    getWeddingPostForSeller: IWeddingResponse[]
 };
-const ViewPost: React.FC = () => {
+const ViewWeddingPost: React.FC = () => {
     const [userMobile, setUserMobile] = useState("04122853111");
-    const [allPostList, setAllPostList] = useState<IFormDataResponse [] | null>(null);
-    const [filteredPostList, setFilteredPostList] = useState<IFormDataResponse [] | null>(null);
+    const [allPostList, setAllPostList] = useState<IWeddingResponse [] | null>(null);
+    const [filteredPostList, setFilteredPostList] = useState<IWeddingResponse [] | null>(null);
     const loginDetail: { loginDetails: string } = useSelector((state: RootState) => state.loginReducer);
     const [loginDetailsDecodes, setLoginDetailsDecodes] = useState<IloginDetails[] | null>(null);
     const [show, setShow] = useState(false);
 
 
-    const {refetch, loading, error, data} = useQuery<IGetUserPost, { sellerContact: string }>(GET_Wedding_POST_FOR_SELLER,
+    const {refetch, loading, error, data} = useQuery<IGetUserWeddingPost, { sellerContact: string }>(GET_Wedding_POST_FOR_SELLER,
         {variables: {sellerContact: userMobile}}
     );
 
@@ -75,18 +76,20 @@ const ViewPost: React.FC = () => {
     }, [loginDetail]);
 
     useEffect(() => {
+        console.log(data)
         if (!data) return;
-        setAllPostList(data.getPost);
-        setFilteredPostList(data.getPost);
+        setAllPostList(data.getWeddingPostForSeller);
+        setFilteredPostList(data.getWeddingPostForSeller);
+
     }, [data]);
 
 
     const {register, handleSubmit, watch, reset, control, formState: {errors}} = useForm();
     const onSubmit = (formData: any) => {
         if (!allPostList) return;
-        setFilteredPostList(allPostList.filter((post: IFormDataResponse) => {
+        setFilteredPostList(allPostList.filter((post: IWeddingResponse) => {
             if (
-                post.title.toLowerCase().includes(formData.title.toLowerCase()) &&
+                (post.fname+post.lname).toLowerCase().includes(formData.title.toLowerCase()) &&
                 (!formData.statusType ? true : post.approved.toLowerCase().includes(formData.statusType.value.toLowerCase()))
             ) {
                 return true;
@@ -100,12 +103,12 @@ const ViewPost: React.FC = () => {
 
     return (
         <React.Fragment>
-            <PageTitle title={"My Advertisement "} subTitle={"Ads - " + String(allPostList ? allPostList.length : "")}/>
+            <PageTitle title={"My Wedding Post"} subTitle={"Ads - " + String(allPostList ? allPostList.length : "")}/>
             <div className="m-auto  postItems-search p-2">
                 <Form onSubmit={handleSubmit(onSubmit)} className="p-2 my-3 search-form">
                     <Row className="col-11 m-0 p-0 m-auto ">
                         <div className="form-group">
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Name</Form.Label>
                             <Form.Control className="advertisement-name-input" type="string"
                                           placeholder="" {...register("title", {})}/>
                         </div>
@@ -127,33 +130,50 @@ const ViewPost: React.FC = () => {
                 </Form>
                 <Row className=" m-0 p-0 m-auto ">
                     <Col xs={12} sm={12} md={12} lg={11} xl={11} className=" m-0 p-0 m-auto ">
-
+                        Wedding
                         <Table striped bordered hover responsive>
                             <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Tile</th>
-                                <th>Reference NO</th>
-                                <th>Desc</th>
-                                <th>Location</th>
-                                <th>Category</th>
-                                <th>Display</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Pro</th>
-                                <th>Status</th>
-                            </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Mobile</th>
+                                    <th>BodyType</th>
+                                    <th>Height</th>
+                                    <th>Approved</th>
+                                    <th>Date</th>
+                                    <th>MaritalStatus</th>
+                                    <th>Dob</th>
+                                    <th>Message</th>
+                                    <th>Location</th>
+                                    <th>Nationality</th>
+                                    <th>Religion</th>
+                                    <th>EducationLevel</th>
+                                    <th>Job</th>
+                                    <th>Language</th>
+                                    <th>Lagnaya</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
                             </thead>
                             <tbody>
 
                             {
                                 filteredPostList &&
-                                filteredPostList.map((post: IFormDataResponse, index) => {
+                                filteredPostList.map((post: IWeddingResponse, index) => {
                                     return (
                                         // <PostItem key={index} componentType={"1"} postData={post}/>
-                                            <PostTableRow key={index} post={post} reload={refetch}/>
+                                            <WeddingPostTableRow key={index} post={post} reload={refetch}/>
+                                        // <h1>asd</h1>
                                     )
                                 })
+                            }
+                            {
+                                !filteredPostList &&
+                                    <NoItemFound componentType={"1"}/>
                             }
                             </tbody>
                         </Table>
@@ -168,4 +188,4 @@ const ViewPost: React.FC = () => {
     );
 };
 
-export default ViewPost;
+export default ViewWeddingPost;
