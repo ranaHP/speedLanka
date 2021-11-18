@@ -1,0 +1,34 @@
+.create-post-home-container{
+  width: 100%;
+  min-height: 82.3vh;
+  //background-color: #2570cd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .create-post-home{
+
+    width: 80%;
+    min-height: 500px;
+    //background-color: #f9fbff;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    .card-container{
+      width: 40%;
+      min-width: 200px;
+      height: 400px;
+      //background-color: #2570cd;
+      border-radius: 3px;
+      border: 2px solid #ffffff;
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.16);
+    }
+    .card-body img{
+      max-width: 200px;
+      padding: 10px 0;
+    }
+    .card-body button{
+      margin: 5px 0;
+    }
+  }
+}

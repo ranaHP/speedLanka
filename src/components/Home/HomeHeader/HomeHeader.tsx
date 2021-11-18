@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Image} from "react-bootstrap";
 import PostImage from '../../../asset/images/logo/logo.jpg';
-import logo from "../../../asset/images/logo/logo.jpg";
+import logo from "../../../asset/images/logo/mainWithoutTextLogo.png";
 import SriLankanFlag from "../../../asset/images/flag/sri-lanka.svg";
 import {
     BrowserRouter as Router,
@@ -26,7 +26,7 @@ const HomeHeader : React.FC = ( ) => {
         if(!loginDetailsDecodes){
             history.push("/login");
         }else{
-            history.push("/dashboard");
+            history.push("/dashboard/create-post-home");
         }
     }
 
@@ -56,10 +56,11 @@ const HomeHeader : React.FC = ( ) => {
         <div className="user-home-header">
             <div className="logo">
                 <Image src={logo} width="100%"/>
+                <div className="logoName"> SPEEDLANKA</div>
             </div>
             <div className="user-home-navbar">
                 <Link to="/">Home</Link>
-                <Link to="/wedding">Wedding</Link>
+                <Link to="/wedding/all/75/18/all/all/all">Wedding</Link>
                 <Link to="/product/all/all/all">Buy</Link>
                 <div style={{cursor: "pointer"}}
                      onClick={handleOnCheckIsLoged}
@@ -67,10 +68,10 @@ const HomeHeader : React.FC = ( ) => {
 
             </div>
             <div className="user-home-login-register">
-                <div className="language">
+                {/*<div className="language">*/}
 
-                    <Image src={SriLankanFlag} width="30px"/>
-                </div>
+                {/*    <Image src={SriLankanFlag} width="30px"/>*/}
+                {/*</div>*/}
                 {!loginDetailsDecodes &&
                     <>
                         <Link to="/register" ><div className="register-btn">

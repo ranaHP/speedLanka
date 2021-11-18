@@ -104,7 +104,7 @@ const Register: React.FC = () => {
     useEffect(() => {
         if(!data) return;
         if(data.createUser._id != ""){
-            setErrorMessage("Registration Success");
+            setErrorMessage("");
             // dispatch(setLoginDetails(data.getUser.data));
             setTimeout(() => {
                 history.push("/login");

@@ -7,8 +7,26 @@
   height: 55px;
   //background-color: #fccc1a;
 
-  .logo{
-    width: 60px;
+  .logo img{
+    width: 40px;
+    margin-right: 10px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+
+
+  }
+  .logo .logoName{
+    font-size: 1.5em;
+    font-weight: 700;
+    background: #224094;
+    background: -webkit-linear-gradient(to right, #224094 0%, #FDCD16 72%);
+    background: -moz-linear-gradient(to right, #224094 0%, #FDCD16 72%);
+    background: linear-gradient(to right, #224094 0%, #FDCD16 72%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 3px 5px rgba(0, 0, 0, 0.15);
   }
   .user-home-navbar {
     list-style: none;
@@ -38,6 +56,11 @@
       color: white;
       padding: 1px 50px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      font-size: 1.1em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -126,7 +149,7 @@
         font-weight: 500;
       }
       .special-nav{
-        padding: 1px 10px;
+        padding: 1px 100px;
       }
     }
     .user-home-login-register{

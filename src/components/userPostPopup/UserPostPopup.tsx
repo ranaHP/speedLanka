@@ -77,15 +77,12 @@ const UserPostPopup: React.FC<UserCategorySearchProps> = (props) => {
                             <Col xs={12} sm={12} md={12} lg={4} xl={4} className="action ">
                                 <VerifiedUser approved={"aprooe"}/>
                                 <Favorit postData={props.postData} componentType={"2"}/>
-                                {
-                                    props.postData &&
-                                    <Button className="btn btn-success copyContact " onClick={() => {
-                                        // copyToClipboard(props.postData ? "" : props.postData.displayNumber);
-                                    }}>
-                                        Coppy Number
-                                    </Button>
+                                <Button className="btn btn-success copyContact " onClick={() => {
+                                    copyToClipboard(props.postData ? props.postData.displayNumber: "000000000");
+                                }}>
 
-                                }
+                                    Coppy Number
+                                </Button>
                             </Col>
                         </Row>
                         <Col xs={12} sm={12} md={12} lg={12} xl={12} className="desc mt-4">

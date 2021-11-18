@@ -4,7 +4,15 @@ import PostImage from '../../../asset/images/logo/logo.jpg';
 import HeroBanner2 from "../../../asset/images/banners/bannerImage1.svg";
 import categoryCard1 from "../../../asset/images/categoryIcon/1.svg";
 import HomeItemTitle from "../HomeItemTitle/HomeItemTitle";
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+    useHistory,
+    useLocation
+} from "react-router-dom";
 const HomeCategory: React.FC = () => {
     let categoryItems = [
         {
@@ -70,11 +78,13 @@ const HomeCategory: React.FC = () => {
             <div className="user-home-category-container">
                 {
                     categoryItems.map(item => {
-                        return <div className="category-card">
-                            <Image src={categoryCard1} width="50px"/>
-                            <div className="card-title">{item.name} <br/> <span
-                                className="card-sub-title"> Ads : {item.ads}</span></div>
-                        </div>
+                        return <Link to={"/product/all/" + item.name + "/all"} >
+                            <div className="category-card">
+                                <Image src={categoryCard1} width="50px"/>
+                                <div className="card-title">{item.name} <br/> <span
+                                    className="card-sub-title"> Ads : {item.ads}</span></div>
+                            </div>
+                        </Link>
                     })
                 }
             </div>

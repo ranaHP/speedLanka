@@ -1,7 +1,23 @@
 .user-home-hero-banner {
+  width: 100%;
   height: fit-content;
   display: flex;
   padding: 40px;
+  min-width: 90vw ;
+  min-height: 500px;
+  .carouselContainer{
+    background-color: #EB3B5A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .myCarouselItem{
+    background-color: #132b8f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+  }
   .text-content {
     margin-top: 100px;
     width: 56%;
