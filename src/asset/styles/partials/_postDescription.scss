@@ -51,3 +51,58 @@
 
   }
 }
+
+
+.weddingPostDesc{
+  font-family: 'Montserrat', sans-serif;
+  font-size: .85em;
+
+  .post-desc-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  .post-desc-image-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .post-desc-image-container{
+      height: fit-content;
+      width: 250px;
+      padding: 10px;
+    }
+    .post-desc-image-container:hover {
+      -ms-transform: scale(1.5); /* IE 9 */
+      -webkit-transform: scale(1.5); /* Safari 3-8 */
+      transform: scale(1.5);
+    }
+  }
+  .image{
+    padding: 0px;
+    padding-left: 2px;
+    display: flex;
+    justify-content: center;
+    img{
+      height: 150px;
+      width: 200px;
+      border-radius: 0;
+      border: 1px solid rgba(128, 128, 128, 0.47);
+      margin: auto;
+    }
+  }
+  .action{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .update {
+      color: #fccc1a;
+    }
+    .copyContact{
+      font-size: .9em;
+      background-color: $primary-color;
+    }
+
+  }
+}

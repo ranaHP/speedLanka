@@ -35,53 +35,41 @@ const tempNavItems: INavItem [] = [
 
 ];
 const navItems: INavItem [] = [
+    // {
+    //     title: 'Home',
+    //     route: 'dashboard',
+    //     icon : 'trello',
+    //     subNav: [
+    //         {
+    //             icon : 'trello',
+    //             title: 'Dashboard',
+    //             route: 'dashboard',
+    //             subNav: null
+    //         }
+    //     ]
+    // },
     {
-        title: 'Home',
-        route: 'dashboard',
-        icon : 'trello',
-        subNav: [
-            {
-                icon : 'trello',
-                title: 'Dashboard',
-                route: 'dashboard',
-                subNav: null
-            }
-        ]
-    },
-    {
-        title: 'Post',
+        title: 'Create Post',
         route: 'dashboard/',
         icon: 'shopping-bag',
         subNav: [
             {
-                icon: 'menu',
-                title: 'Create',
-                route: 'dashboard/view-add',
-                subNav: null
-            },
-            {
                 icon: 'plus-circle',
                 title: 'List',
-                route: 'dashboard/create-add',
+                route: 'dashboard/create-post-home',
                 subNav: null
             }
         ]
     }
     ,{
-        title: 'wedding',
+        title: 'View Post',
         route: 'dashboard/',
         icon: 'shopping-bag',
         subNav: [
             {
                 icon: 'menu',
                 title: 'Create',
-                route: 'dashboard/view-wedding-add',
-                subNav: null
-            },
-            {
-                icon: 'plus-circle',
-                title: 'List',
-                route: 'dashboard/create-wedding-add',
+                route: 'dashboard/view-post-home',
                 subNav: null
             }
         ]

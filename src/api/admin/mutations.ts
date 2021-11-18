@@ -34,25 +34,25 @@ export const SET_STATUS_CHANGE = gql`
     }
 `;
 
-//wedding
-// export const Change_Status_Wedding_Post = gql`
-//     mutation changeStatusWeddingPost(
-//         $_id : String!
-//         $status : String! ,
-//         $message : String!
-//     ){
-//       changeStatusWeddingPost(
-//         status: $status,
-//         _id: $_id,
-//         message: $message
-//       ){
-//         isUpdated
-//       }
-//     }
-//
-// `;
-//
-//
+// wedding
+export const Change_Status_Wedding_Post = gql`
+    mutation changeStatusWeddingPost(
+        $_id : String! ,
+        $status : String! ,
+        $message : String!
+    ){
+      changeStatusWeddingPost(
+        status: $status,
+        _id: $_id,
+        message: $message
+      ){
+        isUpdated
+      }
+    }
+
+`;
+
+
 export const Create_Wedding_Post = gql`
     mutation createWeddingPostMutation(
       $_id: String !,

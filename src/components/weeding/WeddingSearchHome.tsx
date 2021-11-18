@@ -9,10 +9,14 @@ import WeddingSearch from "./WeddingSearch/WeddingSearch";
 import WeddingProfileCard from "./WeddingProfileCard/WeddingProfileCard";
 import {GET_SEARCH_Wedding_POST} from "../../api/admin/queries";
 import {useQuery} from "@apollo/client";
+import {useParams} from "react-router-dom";
+// import {searchUrlParameter} from "../../views/Home";
 
 export interface IGetUserSearchWeddingPost {
     getWeddingPostsSearch: IWeddingResponse[]
+    // onSearch: (looking: string, ageFrom: string, ageTo: string, religion: string, mTongue: string, job: string) => void
 };
+export interface searchWeddingUrlParameter {looking: string, ageFrom: string, ageTo: string, religion: string, mTongue: string, job: string}
 const WeddingSearchHome : React.FC = ( ) => {
     const [filteredPostList, setFilteredPostList] = useState<IWeddingResponse [] | null>(null);
     const [allPostList, setAllPostList] = useState<IWeddingResponse [] | null>(null);
@@ -22,6 +26,50 @@ const WeddingSearchHome : React.FC = ( ) => {
     const [religion, setReligion] = useState<string>("");
     const [motherTongue, setMotherTongue] = useState<string>("");
     const [job, setJob] = useState<string>("");
+    let urlParameters  = useParams<searchWeddingUrlParameter>();
+    useEffect(() => {
+        if(urlParameters.looking == 'all'){
+            setLooking("");
+        }else{
+            let lookingTemp = urlParameters.looking;
+            setLooking(lookingTemp);
+        }
+
+        if(urlParameters.ageFrom == 'all'){
+            setAgeStart(18);
+        }else{
+            let ageFromTemp = Number(urlParameters.ageFrom);
+            setAgeTo(ageFromTemp);
+        }
+        if(urlParameters.ageTo  == 'all'){
+            setAgeTo(75);
+        }else{
+            let ageToTemp = urlParameters.ageTo;
+            setMotherTongue(ageToTemp);
+        }
+        if(urlParameters.religion == 'all'){
+            setReligion("");
+        }else{
+            let religionTemp = urlParameters.religion;
+            setReligion(religionTemp);
+        }
+
+        if(urlParameters.mTongue == 'all'){
+            setMotherTongue("");
+        }else{
+            let mTongueTemp = urlParameters.mTongue;
+            setMotherTongue(mTongueTemp);
+        }
+
+
+        if(urlParameters.job == 'all'){
+            setJob("");
+        }else{
+            let jobTemp = urlParameters.job;
+            setJob(jobTemp);
+        }
+
+    }, [urlParameters]);
 
     const {refetch, loading, error, data} = useQuery<IGetUserSearchWeddingPost, {
         gender : string,

@@ -36,6 +36,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background-color:#006633;
     ul{
       list-style: none;
       color: #646464;
@@ -66,6 +67,8 @@
 }
 @include media-breakpoint-down(md) {
   .postItem{
+    background-color:#006633;
+
     .image{
       padding: 0px;
       padding-top: 20px;
