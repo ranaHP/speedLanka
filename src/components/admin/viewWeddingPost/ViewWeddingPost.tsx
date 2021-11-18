@@ -171,10 +171,7 @@ const ViewWeddingPost: React.FC = () => {
                                     )
                                 })
                             }
-                            {
-                                !filteredPostList &&
-                                    <NoItemFound componentType={"1"}/>
-                            }
+
                             </tbody>
                         </Table>
                     </Col>

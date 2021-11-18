@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IAttribute, IFormDataResponse, IWeddingResponse} from "../../../types/MainTypes";
 import {Button, Col, Form, Image, Modal, Row, Table} from "react-bootstrap";
 import PostEditModel from "../postEditModel/PostEditModel";
 import {toast, ToastContainer} from "react-toastify";
 import {useMutation} from "@apollo/client";
 import {Change_Status_Wedding_Post, SET_STATUS_CHANGE} from "../../../api/admin/mutations";
+import {imageGetUrl, imageUploadUrl} from "../../../api/API";
+import axios from "axios";
 
 type PostTableRowProps = {
     post: IWeddingResponse
@@ -19,6 +21,7 @@ const WeddingPostTableRow: React.FC<PostTableRowProps> = (props) => {
     const [showGetMessage, setShowGetMessage] = useState(false);
     const [popupMessage, setPopupMessage] = useState<string>("");
     const [rejectMessage, setRejectMessage] = useState<string>("");
+    const [imageWeddingURL, setImageWeddingURL] = useState<string>("");
     const [showReject, setShowReject] = useState(false);
 
     const handleOnGetMessage = () => {
@@ -72,6 +75,30 @@ const WeddingPostTableRow: React.FC<PostTableRowProps> = (props) => {
     const handleOnGetReason = () => {
 
     }
+    const getImageUrl = (image: string) : string => {
+        console.log(image);
+        return image;
+    }
+
+    const getImageAccessUrl = ( ) => {
+        const generateGetUrl = imageGetUrl;
+        const options = {
+            params: {
+                Key: props.post.image,
+                ContentType: 'image/jpeg'
+            }
+        };
+        axios.get(generateGetUrl, options).then(res => {
+            const { data: getURL } = res;
+            setImageWeddingURL(getURL);
+        });
+    }
+
+    useEffect(() => {
+        if(!props.post) return;
+
+        getImageAccessUrl();
+    }, [props.post]);
     const handleOnStatus = (status: String) => {
         if (status == "approved") {
             return (
@@ -269,7 +296,7 @@ const WeddingPostTableRow: React.FC<PostTableRowProps> = (props) => {
 
                 <td>
                     <ToastContainer/>
-                    <Image src={props.post.image == "" ? "" : props.post.image} height="50px"/>
+                    <Image src={props.post.image == "" ? "" : imageWeddingURL} height="50px"/>
                 </td>
                 <td>{props.post.fname + " " + props.post.fname }</td>
                 <td>{props.post.age}</td>

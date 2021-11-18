@@ -3,31 +3,23 @@ import {Alert, Button, Col, Image, Row} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form'
 import {
     IAttribute,
-    ICategory,
-    ICategoryOption,
-    IFormData,
-    IFormGroup,
-    ILocation,
     IOption
 } from "../../../types/MainTypes";
 import {Electronic} from "../../../config/attributeType";
-import PostItem from "../../Post/PostItem";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../store/reducers/rootReducers";
 import {updateTempPost} from "../../../store/actions/TempPostItem";
 import jwt_decode from "jwt-decode";
 import {IloginDetails} from "../../../store/Interfaces/inteface";
-import {alertSystemAction} from "../../../store/actions/AlertSystem";
-import {useForm, Controller, SubmitHandler} from "react-hook-form";
-import Select from "react-select";
+import {useForm} from "react-hook-form";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {categoryType} from "../../../config/postCategory";
-import {province_cities_district} from "../../../config/province_cities_district";
 import {useMutation} from "@apollo/client";
 import {CREATE_POST} from "../../../api/user/mutations";
 import UserCategorySearch from "../../userSearchCategory/UserCategorySearch";
 import UserLocationSearch from "../../userSearchLocation/UserLocationSearch";
+import {imageUploadUrl} from "../../../api/API";
+import axios from "axios";
 const options: IOption[] = [
 ]
 
@@ -117,17 +109,76 @@ const ProductForm: React.FC = () => {
     const dispatch = useDispatch();
 
     const onSubmit = async (formData: any) => {
-
         if(city == "Select city" || secondaryType == "Select Categories" ){
             setErrorMessage("All fields are required!");
             return;
         }
         setErrorMessage("");
+        setisLoading(true);
+        const file = imageUploadFile1;
+        setImageUploadMessage("Uploading...");
+        console.log('asd22')
+        if (!file) return;
+        const contentType = file.type; // eg. image/jpeg or image/svg+xml
+        const id =  (formData.title+ formData.sContact + Math.floor(Math.random() * 100000)).replaceAll(" ", "");
+        const generatePutUrl = imageUploadUrl;
+        const options = [
+            {
+                params: {
+                    Key:  id + "1."+ imageUploadName1.split(".")[imageUploadName1.split(".").length-1],
+                    ContentType: contentType
+                },
+                headers: {
+                    'Content-Type': contentType
+                }
+            },
+            {
+                params: {
+                    Key:  id + "2."+ imageUploadName2.split(".")[imageUploadName2.split(".").length-1],
+                    ContentType: contentType
+                },
+                headers: {
+                    'Content-Type': contentType
+                }
+            },
+            {
+                params: {
+                    Key:  id + "3."+ imageUploadName3.split(".")[imageUploadName3.split(".").length-1],
+                    ContentType: contentType
+                },
+                headers: {
+                    'Content-Type': contentType
+                }
+            }
+        ];
+        console.log({
+            variables: {
+                _id: id,
+                cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
+                location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
+                title: formData.title,
+                price: formData.price,
+                desc: formData.desc,
+                displayNumber: formData.sContact,
+                sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
+                sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..",
+                images: id + "1."+ imageUploadName1.split(".")[imageUploadName1.split(".").length-1] +'/'+ id
+                    +  "2."+ imageUploadName2.split(".")[imageUploadName2.split(".").length-1] +'/'+
+                    id +  "3."+ imageUploadName3.split(".")[imageUploadName3.split(".").length-1],
+                approved: "pending",
+                date:(new Date()).toDateString(),
+                sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..",
+                attribute: JSON.stringify(attributeList)
+            }
+        })
+        const date:string = (new Date()).toDateString();
+        console.log(date);
+        console.log(new Date());
         try {
             const data = new Date();
             const newPost = await createPostMutation({
                 variables: {
-                    _id: String(formData.title+ formData.sContact + Math.floor(Math.random() * 100000)),
+                    _id: id,
                     cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
                     location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
                     title: formData.title,
@@ -136,9 +187,11 @@ const ProductForm: React.FC = () => {
                     displayNumber: formData.sContact,
                     sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
                     sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..",
-                    images: imageUploadName1 +'/'+ imageUploadName2 +'/'+ imageUploadName3,
+                    images: id + "1."+ imageUploadName1.split(".")[imageUploadName1.split(".").length-1] +'/'+ id
+                        +  "2."+ imageUploadName2.split(".")[imageUploadName2.split(".").length-1] +'/'+
+                        id +  "3."+ imageUploadName3.split(".")[imageUploadName3.split(".").length-1],
                     approved: "pending",
-                    date: data.getDate(),
+                    date: date,
                     sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..",
                     attribute: JSON.stringify(attributeList)
                 }
@@ -171,8 +224,8 @@ const ProductForm: React.FC = () => {
         }
 
         setTimeout(() => {
-           reset();
-           setAttributeList(null);
+            reset();
+            setAttributeList(null);
         }, 1000)
         toast.success('Post Successfully Added!', {
             position: "top-right",
@@ -183,30 +236,145 @@ const ProductForm: React.FC = () => {
             draggable: true,
             progress: undefined,
         });
+        // await axios.get(generatePutUrl, options[0]).then(res => {
+        //     const {
+        //         data: {putURL}
+        //     } = res;
+        //     axios
+        //         .put(putURL, file, options[0])
+        //         .then(async (res: any) => {
+        //             setImageUploadMessage('Image Upload Successful')
+        //             await axios.get(generatePutUrl, options[1]).then(res => {
+        //                 const {
+        //                     data: {putURL}
+        //                 } = res;
+        //                 axios
+        //                     .put(putURL, file, options[1])
+        //                     .then(async (res: any) => {
+        //                         setImageUploadMessage('Image Upload Successful')
+        //                         await axios.get(generatePutUrl, options[2]).then(res => {
+        //                             const {
+        //                                 data: {putURL}
+        //                             } = res;
+        //                             axios
+        //                                 .put(putURL, file, options[2])
+        //                                 .then(async (res: any) => {
+        //                                     setImageUploadMessage('Image Upload Successful')
+        //                                      //www
+        //                                     try {
+        //                                         const data = new Date();
+        //                                         const newPost = await createPostMutation({
+        //                                             variables: {
+        //                                                 _id: id,
+        //                                                 cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
+        //                                                 location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
+        //                                                 title: formData.title,
+        //                                                 price: formData.price,
+        //                                                 desc: formData.desc,
+        //                                                 displayNumber: formData.sContact,
+        //                                                 sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
+        //                                                 sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..",
+        //                                                 images: id + "1."+ imageUploadName1.split(".")[imageUploadName1.split(".").length-1] +'/'+ id
+        //                                                     +  "2."+ imageUploadName2.split(".")[imageUploadName2.split(".").length-1] +'/'+
+        //                                                     id +  "3."+ imageUploadName3.split(".")[imageUploadName3.split(".").length-1],
+        //                                                 approved: "pending",
+        //                                                 date: (new Date()).toDateString(),
+        //                                                 sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp..",
+        //                                                 attribute: JSON.stringify(attributeList)
+        //                                             }
+        //                                         });
+        //                                         setProvince("");
+        //                                         setDistrict("")
+        //                                         setCity("Select city");
+        //                                         setPrimaryType("");
+        //                                         setSecondaryType("Select Categories");
+        //                                         setImageUrl1("");
+        //                                         setImageUrl2("");
+        //                                         setImageUrl3("");
+        //                                         reset();
+        //                                     } catch (e) {
+        //                                         // console.log(e);
+        //                                         setErrorMessage("This mobile number already used!");
+        //                                         toast.error('Registration invalid! \n This mobile number already used!', {
+        //                                             position: "top-right",
+        //                                             autoClose: 5000,
+        //                                             hideProgressBar: false,
+        //                                             closeOnClick: true,
+        //                                             pauseOnHover: true,
+        //                                             draggable: true,
+        //                                             progress: undefined,
+        //                                         });
+        //                                         if (error) {
+        //                                             setErrorMessage("This mobile number already used! !");
+        //                                         }
+        //                                         ;
+        //                                     }
+        //
+        //                                     setTimeout(() => {
+        //                                         reset();
+        //                                         setAttributeList(null);
+        //                                     }, 1000)
+        //                                     toast.success('Post Successfully Added!', {
+        //                                         position: "top-right",
+        //                                         autoClose: 5000,
+        //                                         hideProgressBar: false,
+        //                                         closeOnClick: true,
+        //                                         pauseOnHover: true,
+        //                                         draggable: true,
+        //                                         progress: undefined,
+        //                                     });
+        //                                     //www
+        //                                 })
+        //                                 .catch((err: Error) => {
+        //                                     setImageUploadMessage('Sorry, something went wrong on uploading image');
+        //                                     setisLoading(false);
+        //                                     console.log('err', err);
+        //                                     return false;
+        //                                 });
+        //                         });
+        //                     })
+        //                     .catch((err: Error) => {
+        //                         setImageUploadMessage('Sorry, something went wrong on uploading image');
+        //                         setisLoading(false);
+        //                         console.log('err', err);
+        //                         return false;
+        //                     });
+        //             });
+        //         })
+        //         .catch((err: Error) => {
+        //             setImageUploadMessage('Sorry, something went wrong on uploading image');
+        //             setisLoading(false);
+        //             console.log('err', err);
+        //             return false;
+        //         });
+        // });
+
+
     };
 
-    useEffect(() => {
-        if(!watch('title')) return;
-        dispatch(updateTempPost({
-            title: watch('title'),
-            _id: "",
-            cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
-            sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
-            attribute: attributeList ? attributeList : [],
-            date: Date(),
-            price: watch('price'),
-            approved: "approved",
-            sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp...",
-            desc: watch("desc"),
-            location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
-            displayNumber: watch("sContact"),
-            images: imageUploadName1 +'/'+ imageUploadName2 +'/'+ imageUploadName3,
-            sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..."
-        }));
-        setIsPostItem(true);
 
-
-    }, [imageUrl1, imageUrl2,imageUrl3, attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') , secondaryType,city ]);
+    // useEffect(() => {
+    //     if(!watch('title')) return;
+    //     dispatch(updateTempPost({
+    //         title: watch('title'),
+    //         _id: "",
+    //         cType: primaryType.toLowerCase() + '/' + secondaryType.toLowerCase(),
+    //         sellerName: loginDetailsDecodes ? loginDetailsDecodes[0].name : "temp..",
+    //         attribute: attributeList ? attributeList : [],
+    //         date:(new Date()).toDateString(),
+    //         price: watch('price'),
+    //         approved: "approved",
+    //         sellerVerified: loginDetailsDecodes ? loginDetailsDecodes[0].status : "temp...",
+    //         desc: watch("desc"),
+    //         location: province.toLowerCase() + '/' + district.toLowerCase() + '/' + city.toLowerCase(),
+    //         displayNumber: watch("sContact"),
+    //         images: imageUploadName1 +'/'+ imageUploadName2 +'/'+ imageUploadName3,
+    //         sellerContact: loginDetailsDecodes ? loginDetailsDecodes[0].contact : "temp..."
+    //     }));
+    //     setIsPostItem(true);
+    //
+    //
+    // }, [imageUrl1, imageUrl2,imageUrl3, attributeList, watch('title'), watch('price'), watch('desc'), watch('sContact') , secondaryType,city ]);
 
     const handleOnCategoryChange = (primaryC: string, secondaryC: string) => {
         setPrimaryType(primaryC);
