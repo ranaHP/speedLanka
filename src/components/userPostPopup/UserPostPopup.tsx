@@ -78,7 +78,7 @@ const UserPostPopup: React.FC<UserCategorySearchProps> = (props) => {
                                 <VerifiedUser approved={"aprooe"}/>
                                 <Favorit postData={props.postData} componentType={"2"}/>
                                 <Button className="btn btn-success copyContact " onClick={() => {
-                                    copyToClipboard(props.postData ? props.postData.displayNumber: "000000000");
+                                    copyToClipboard(    props.postData ? props.postData.displayNumber: "000000000");
                                 }}>
 
                                     Coppy Number

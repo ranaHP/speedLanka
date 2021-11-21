@@ -158,7 +158,7 @@ const Register: React.FC = () => {
 
                                             <Form.Group className="mb-3" >
                                                 <Form.Label>Phone Number</Form.Label>
-                                                <Form.Control type="number" placeholder="ex: 0412283222"  {...register("mobile",  { required: true, maxLength: 10 })}/>
+                                                <Form.Control type="number" placeholder="ex: 07* **** ***"  {...register("mobile",  { required: true, maxLength: 10 })}/>
                                                 <Form.Text className="text-muted">
                                                     {errors.mobile ? <span className="text-danger">This field is required valid phone number</span> : "We'll never share your phone number with anyone else." }
                                                 </Form.Text>
@@ -174,7 +174,7 @@ const Register: React.FC = () => {
 
                                             <Form.Group className="mb-3" >
                                                 <Form.Label>Location</Form.Label>
-                                                <Form.Control type="text" placeholder="ex: no 54, matara ,akuress" {...register("address",  { required: true })}/>
+                                                <Form.Control type="text" placeholder="ex: ********" {...register("address",  { required: true })}/>
                                                 <Form.Text className="text-muted">
                                                     {errors.address ? <span className="text-danger">This field is required valid address</span> : "We'll never share your phone number with anyone else." }
                                                 </Form.Text>
