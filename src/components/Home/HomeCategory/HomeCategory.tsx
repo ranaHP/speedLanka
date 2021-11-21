@@ -18,57 +18,52 @@ const HomeCategory: React.FC = () => {
         {
             name: "Electronics",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/electric.png"
         },
         {
             name: "Animals",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/2.svg"
         },
         {
             name: "Fashion & Beauty",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/fashion.png"
         },
         {
             name: "Agriculture",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/agri.png"
         },
         {
             name: "Vehicles",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/vehicle.png"
         },
         {
             name: "Business & Industry",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/1.svg"
         },
         {
-            name: "Jobs",
+            name: "Business",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/business.png"
         },
         {
-            name: "Agriculture",
+            name: "Mobile",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/mobilr.png"
         },
         {
-            name: "Vehicles",
+            name: "Property",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/property.png"
         },
         {
-            name: "Business & Industry",
+            name: "Sport",
             ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
-        },
-        {
-            name: "Jobs",
-            ads: 22,
-            image: "../../asset/images/categoryIcon/1.svg"
+            image: "staticImages/categoryIcon/sports.png"
         }
     ]
 
@@ -80,7 +75,7 @@ const HomeCategory: React.FC = () => {
                     categoryItems.map(item => {
                         return <Link to={"/product/all/" + item.name + "/all"} >
                             <div className="category-card">
-                                <Image src={categoryCard1} width="50px"/>
+                                <Image src={item.image} width="50px"/>
                                 <div className="card-title">{item.name} <br/> <span
                                     className="card-sub-title"> Ads : {item.ads}</span></div>
                             </div>
